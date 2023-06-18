@@ -41,7 +41,7 @@ function playSong(songUrl, songName) {
     // Update the progress bar value periodically
     intervalId = setInterval(function() {
       progressBar.value = audio.currentTime;
-    }, 100);
+    }, 1000);
     });
     
    function displayCurrentTime() {
@@ -55,7 +55,7 @@ function playSong(songUrl, songName) {
   }
 
   // Call the displayCurrentTime function periodically
-  intervalId = setInterval(displayCurrentTime, 100);
+  intervalId = setInterval(displayCurrentTime, 1000);
 }
 
 function togglePlayPause() {
