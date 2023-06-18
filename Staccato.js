@@ -76,3 +76,22 @@ function updatePlayPauseIcon(state) {
     playPauseIcon.src = 'assets/Play.svg';
   }
 }
+ // Add the event listener for the progressBar input event
+    progressBarVolume.addEventListener('input', function() {
+      const volume = progressBarVolume.value / 100;
+      currentAudio.volume = volume;
+    });
+
+    // Add the event listener for the progressBar change event
+    progressBarVolume.addEventListener('change', function() {
+      const volume = progressBarVolume.value / 100;
+      currentAudio.volume = volume;
+
+      if (progressBarVolume.value == 0) {
+        // Mute the audio
+        currentAudio.muted = true;
+      } else {
+        // Unmute the audio
+        currentAudio.muted = false;
+      }
+    });
