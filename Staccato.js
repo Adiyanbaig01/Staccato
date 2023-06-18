@@ -1,6 +1,6 @@
 let currentAudio = null; // Stores the reference to the current audio element
 let intervalId = null; // Stores the interval ID for updating the current time
-const progressBar = document.getElementById('progressBar');
+let progressBar = document.getElementById('progressBar');
 let mouseDownOnSlider = false;
 
 function playSong(songUrl, songName) {
@@ -15,7 +15,7 @@ function playSong(songUrl, songName) {
 
   audio.addEventListener('loadedmetadata', function() {
     // Get the duration of the audio in seconds
-    let duration = audio.duration;
+    const duration = audio.duration;
 
     // Convert the duration to minutes and seconds
     const minutes = Math.floor(duration / 60);
@@ -25,38 +25,64 @@ function playSong(songUrl, songName) {
     document.getElementById('songLength').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
     // Display the song name on the webpage
-    document.getElementById('songName').textContent = `Now Playing : ${songName}`;
+    document.getElementById('songName').textContent = `Now Playing: ${songName}`;
 
-    // Reset the progress bar slider and current time
+    // Reset the progress bar slider
     progressBar.value = 0;
-    progressBar.max = duration;
-    audio.currentTime = 0;
-    
+  });
 
-    // Update the progress bar as the song progresses
-    progressBar.addEventListener('input', function() {
-      audio.currentTime = progressBar.value;
-    });
-    
-    // Update the progress bar value periodically
-    intervalId = setInterval(function() {
-      progressBar.value = audio.currentTime;
-    }, 1000);
-    });
-    
-   function displayCurrentTime() {
+  function displayCurrentTime() {
     const currentTime = audio.currentTime;
     const minutes = Math.floor(currentTime / 60);
     const seconds = Math.floor(currentTime % 60);
     const formattedTime = `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
     document.getElementById('currentTime').textContent = formattedTime;
 
-     
+    // Update the progress bar
+    if (!mouseDownOnSlider) {
+      const pct = (currentTime / audio.duration) * 100;
+      progressBar.value = pct;
+    }
   }
 
   // Call the displayCurrentTime function periodically
-  intervalId = setInterval(displayCurrentTime, 1000);
+  intervalId = setInterval(displayCurrentTime, 100);
 }
+
+function togglePlayPause() {
+  if (currentAudio.paused) {
+    currentAudio.play();
+    updatePlayPauseIcon('play');
+  } else {
+    currentAudio.pause();
+    updatePlayPauseIcon('pause');
+  }
+}
+
+function updatePlayPauseIcon(state) {
+  const playPauseIcon = document.getElementById('playPauseIcon');
+  if (state === 'play') {
+    playPauseIcon.src = 'assets/Pause.svg';
+  } else {
+    playPauseIcon.src = 'assets/Play.svg';
+  }
+}
+
+// Add event listener for the progress bar slider
+progressBar.addEventListener("input", () => {
+  const pct = progressBar.value;
+  const currentTime = (currentAudio.duration / 100) * pct;
+  currentAudio.currentTime = currentTime;
+});
+
+progressBar.addEventListener("mousedown", () => {
+  mouseDownOnSlider = true;
+});
+
+progressBar.addEventListener("mouseup", () => {
+  mouseDownOnSlider = false;
+});
+
 
 function togglePlayPause() {
   if (currentAudio.paused) {
