@@ -121,3 +121,60 @@ function updatePlayPauseIcon(state) {
         currentAudio.muted = false;
       }
     });
+
+    // SLider Logic for the Website 
+
+// Get the song list container element
+const songListContainer = document.querySelector('.list');
+
+// Get the previous and next buttons
+const prevButton = document.querySelector('.fa-chevron-left');
+const nextButton = document.querySelector('.fa-chevron-right');
+
+// Calculate the width of each song item
+const songItemWidth = document.querySelector('.item').offsetWidth;
+
+// Set the initial scroll position to 0
+let scrollPosition = 0;
+
+// Add click event listener to the previous button
+prevButton.addEventListener('click', () => {
+  // Calculate the new scroll position by subtracting the song item width
+  scrollPosition -= songItemWidth;
+
+  // Check if the new scroll position is less than 0 (reached the beginning)
+  if (scrollPosition < 0) {
+    // Set the scroll position to 0
+    scrollPosition = 0;
+  }
+
+  // Apply the new scroll position to the song list container
+  songListContainer.scrollTo({
+    top: 0,
+    left: scrollPosition,
+    behavior: 'smooth',
+  });
+});
+
+// Add click event listener to the next button
+nextButton.addEventListener('click', () => {
+  // Calculate the new scroll position by adding the song item width
+  scrollPosition += songItemWidth;
+
+  // Calculate the maximum scroll position
+  const maxScrollPosition = songListContainer.scrollWidth - songListContainer.clientWidth;
+
+  // Check if the new scroll position is greater than the maximum scroll position (reached the end)
+  if (scrollPosition > maxScrollPosition) {
+    // Set the scroll position to the maximum scroll position
+    scrollPosition = maxScrollPosition;
+  }
+
+  // Apply the new scroll position to the song list container
+  songListContainer.scrollTo({
+    top: 0,
+    left: scrollPosition,
+    behavior: 'smooth',
+  });
+});
+
