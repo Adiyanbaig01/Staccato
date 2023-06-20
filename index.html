@@ -7,10 +7,18 @@
   <link rel="stylesheet" href="Staccato.css">
   <link rel="icon" href="Logo.png">
   <title>Staccato - Let's Listen Something Like Never Before </title>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+  <style>
+
+  </style>
+
+
 </head>
 
 <body>
-  <div class="sidebar">
+  <div class="sidebar">sss
     <div class="logo">
       <a href="#">
         <img src="Staccato.jpg" alt="Logo" />
@@ -22,7 +30,7 @@
         <li>
           <a href="#">
             <span class="fa fa-home"></span>
-            <span>Home</span>
+            <span id="homeButton" style=" scroll-behavior: smooth;">Home</span>
           </a>
         </li>
 
@@ -74,11 +82,10 @@
 
   <div class="main-container">
     <div class="topbar">
-      <div class="prev-next-buttons">
+      <div class="prev-next-buttons" >
         <button type="button" class="fa fas fa-chevron-left"></button>
         <button type="button" class="fa fas fa-chevron-right"></button>
       </div>
-
       <div class="navbar">
         <ul>
           <li>
@@ -101,7 +108,6 @@
 
     <div class="spotify-playlists">
       <h2>Staccato Playlists</h2>
-
       <div class="list">
         <div class="item">
           <img src="https://i1.sndcdn.com/artworks-hvuPC7OQC2OBPDov-V1Ht2A-t500x500.jpg" />
@@ -194,7 +200,7 @@
         </div>
       </div>
     </div>
-
+    
     <div class="spotify-playlists">
       <h2> Taylor Swift </h2>
       <div class="list">
@@ -463,7 +469,7 @@
           <p>'I ain't gon' conceal it I'll just do it like the boys say, I'm getting mine, getting mine</p>
         </div>
 
-         <div class="item">
+        <div class="item">
           <img src="https://i1.sndcdn.com/artworks-3sQZWeESgRKR5MqT-Zu0WGQ-t500x500.jpg" />
           <div class="play">
             <span class="fa fa-play" onclick="playSong('Songs/BLACKPINK Crazy Over You.mp3','Crazy Over You')"></span>
@@ -477,7 +483,7 @@
         </div>
       </div>
     </div>
-    
+
     <div class="spotify-playlists">
       <h2> Add Music Artist name here </h2>
 
@@ -575,14 +581,14 @@
         <img src="assets/Shuffle.svg" alt="" class="gray-filtered">
         <img src="assets/Previous.svg" alt="" class="gray-filtered">
         <span class="pause-button">
-          <img id="playPauseIcon" src="assets/Pause.svg" alt="" onclick="togglePlayPause()">
+          <img id="playPauseIcon" src="assets/pause.svg" alt="" onclick="togglePlayPause()">
         </span>
         <img src="assets/Next.svg" alt="" class="gray-filtered">
         <img src="assets/Repeat.svg" alt="" class="gray-filtered">
       </div>
       <div class="footer-player-middle-slider">
         <!-- <img src="Playing.gif" alt="gif" width="25px"> -->
-        <div class="player-time"> <span id="currentTime">00:00</span></div>
+        <div class="player-time"> <span id="currentTime">00:00</span> </div>
         <div class="player-slider">
           <input type="range" name="range" id="progressBar" min="0" max="100" value="0" step="0.1">
         </div>
@@ -603,9 +609,28 @@
     </div>
   </div>
 
-  <script src="https://kit.fontawesome.com/23cecef777.js" crossorigin="anonymous"></script>
+  <footer class="footer-color" id="falling-lines" >
+    <div class="falling-line"></div>
+    <div class="footer-container">
+      <div class="footer-creators">
+        <h1>Developers : </h1>
+        <span id="creators"></span>
+        <span class="cursor"></span>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-logo">
+        <img src="https://f.cdn-static.cn/52549_163098249260012.png?imageView2/2/w/500/q/75" alt="Staccato Logo" >
+      </div>
+      </div>
+  </footer>
+      <div>
+          <br><br><br><br>
+      </div>
+  
 
+  <script src="https://kit.fontawesome.com/23cecef777.js" crossorigin="anonymous"></script>
   <script src="Staccato.js"> </script>
+  <script src="sketch.js"></script>
 </body>
 
 </html>
