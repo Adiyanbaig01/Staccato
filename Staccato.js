@@ -190,7 +190,7 @@ let drops = [];
 let thunderTime = 0;
 let sparklines = [];
 let backgroundBrightness = 0;
-let isRaining = false;
+let isRaining = true;
 let rainToggle;
 
 function setup() {
