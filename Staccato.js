@@ -186,49 +186,48 @@ nextButton.addEventListener('click', () => {
 
  // Program for The Droplets 
 
-let drops = [];
-let thunderTime = 0;
-let sparklines = [];
-let backgroundBrightness = 0;
-let isRaining = true;
-let rainToggle;
-
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-  for (let i = 0; i < 100; i++) {
-    drops.push(new Drop());
-  }
-
-  rainToggle = document.getElementById('rainToggle');
-  rainToggle.addEventListener('change', toggleRain);
-}
-
-function draw() {
-  background(backgroundBrightness);
-
-  if (isRaining) {
-    for (let i = 0; i < drops.length; i++) {
-      drops[i].fall();
-      drops[i].display();
-    }
-
-    if (millis() - thunderTime > random(5000, 6000)) {
-      thunderTime = millis();
-      sparklines.push(new Sparkline());
-      backgroundBrightness = 100;
-    }
-
-    for (let i = sparklines.length - 1; i >= 0; i--) {
-      sparklines[i].display();
-      if (sparklines[i].isFinished()) {
-        sparklines.splice(i, 1);
-      }
-    }
-
-    backgroundBrightness -= 1;
-  }
-}
-
+ let drops = [];
+ let thunderTime = 0;
+ let sparklines = [];
+ let backgroundBrightness = 0;
+ let isRaining = true;
+ let rainToggle;
+ 
+ function setup() {
+   createCanvas(windowWidth, windowHeight);
+   for (let i = 0; i < 100; i++) {
+     drops.push(new Drop());
+   }
+ 
+   rainToggle = document.getElementById('rainToggle');
+   rainToggle.addEventListener('change', toggleRain);
+ }
+ 
+ function draw() {
+   background(backgroundBrightness);
+ 
+   if (isRaining) {
+     for (let i = 0; i < drops.length; i++) {
+       drops[i].fall();
+       drops[i].display();
+     }
+ 
+     if (millis() - thunderTime > random(5000, 6000)) {
+       thunderTime = millis();
+       sparklines.push(new Sparkline());
+       backgroundBrightness = 100;
+     }
+ 
+     for (let i = sparklines.length - 1; i >= 0; i--) {
+       sparklines[i].display();
+       if (sparklines[i].isFinished()) {
+         sparklines.splice(i, 1);
+       }
+     }
+ 
+     backgroundBrightness -= 1;
+   }
+ }
  
  class Drop {
    constructor() {
@@ -283,14 +282,27 @@ function draw() {
  }
  
  function toggleRain() {
-   isRaining = !isRaining;
-   if (!isRaining) {
+  isRaining = !isRaining;
+
+  if (isRaining) {
+    // Regenerate drops
+    drops = [];
+    for (let i = 0; i < 100; i++) {
+      drops.push(new Drop());
+    }
+
+    // Reset thunder time, sparklines, and background brightness
+    thunderTime = 0;
+    sparklines = [];
+    backgroundBrightness = 0;
+  } else {
     // Clear existing drops and sparklines
     drops = [];
     sparklines = [];
     backgroundBrightness = 0;
   }
- }
+}
+
  
 
 
