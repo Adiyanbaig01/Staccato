@@ -528,8 +528,8 @@ canvas {
 .toggle-button {
   display: inline-block;
   position: relative;
-  width: 60px;
-  height: 34px;
+  width: 55px;
+  height: 29px;
 }
 
 .toggle-button input {
@@ -547,19 +547,19 @@ canvas {
   cursor: pointer;
   border-radius: 34px;
   background-color: #CACACA;
-  transition: 0.4s;
+  transition: 0.5s;
 }
 
 .slider:before {
   position: absolute;
   content: "";
-  height: 26px;
-  width: 26px;
+  height: 21px;
+  width: 21px;
   left: 4px;
   bottom: 4px;
   border-radius: 50%;
   background-color: #FFFFFF;
-  transition: 0.4s;
+  transition: 0.5s;
 }
 
 input:checked + .slider {
