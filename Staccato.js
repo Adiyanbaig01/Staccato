@@ -365,4 +365,4 @@ function createFallingLine() {
   });
 }
 
-setInterval(createFallingLine, 200); // Create new falling line every 200 milliseconds
+setInterval(createFallingLine, 300); // Create new falling line every 200 milliseconds
