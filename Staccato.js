@@ -284,15 +284,12 @@ function draw() {
  
  function toggleRain() {
    isRaining = !isRaining;
-   if (isRaining) {
-     rainButton.textContent = 'Stop Rain';
-   } else {
-     rainButton.textContent = 'Start Rain';
-     // Clear existing drops and sparklines
-      drops = [];
-      sparklines = [];
-      backgroundBrightness = 0;
-   }
+   if (!isRaining) {
+    // Clear existing drops and sparklines
+    drops = [];
+    sparklines = [];
+    backgroundBrightness = 0;
+  }
  }
  
 
