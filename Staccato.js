@@ -187,92 +187,110 @@ nextButton.addEventListener('click', () => {
  // Program for The Droplets 
 
  let drops = [];
-let thunderTime = 0;
-let sparklines = [];
-let backgroundBrightness = 0;
-
-function setup() {
-  createCanvas(windowWidth, windowHeight);
-  for (let i = 0; i < 100; i++) {
-    drops.push(new Drop());
-  }
-}
-
-function draw() {
-  background(backgroundBrightness);
-
-  for (let i = 0; i < drops.length; i++) {
-    drops[i].fall();
-    drops[i].display();
-  }
-
-  if (millis() - thunderTime > random(5000, 6000)) {
-    thunderTime = millis();
-    sparklines.push(new Sparkline());
-    backgroundBrightness = 100;
-  }
-
-  for (let i = sparklines.length - 1; i >= 0; i--) {
-    sparklines[i].display();
-    if (sparklines[i].isFinished()) {
-      sparklines.splice(i, 1);
-    }
-  }
-
-  backgroundBrightness -= 1;
-}
-
-class Drop {
-  constructor() {
-    this.x = random(width);
-    this.y = random(-500, -50);
-    this.z = random(0, 20);
-    this.len = map(this.z, 0, 20, 10, 30);
-    this.yspeed = map(this.z, 0, 20, 1, 20);
-  }
-
-  fall() {
-    this.y += this.yspeed;
-
-    let grav = map(this.z, 0, 20, 0, 0.2);
-    this.yspeed += grav;
-
-    if (this.y > height) {
-      this.y = random(-200, -100);
-      this.yspeed = map(this.z, 0, 20, 1, 20);
-    }
-  }
-
-  display() {
-    let dropWidth = map(this.z, 0, 20, 1, 4);
-    let dropHeight = map(this.z, 0, 20, 10, 30);
-
-    noStroke();
-    fill(150, 150, 255);
-    ellipse(this.x, this.y, dropWidth, dropHeight);
-  }
-}
-
-class Sparkline {
-  constructor() {
-    this.x = random(width);
-    this.y = random(height / 2);
-    this.length = random(20, 100);
-    this.alpha = 255;
-    this.fadeSpeed = random(2, 4);
-  }
-
-  display() {
-    stroke(50, 50, 255, this.alpha);
-    strokeWeight(2);
-    line(this.x, this.y, this.x + this.length, this.y - this.length);
-    this.alpha -= this.fadeSpeed;
-  }
-
-  isFinished() {
-    return this.alpha <= 0;
-  }
-}
+ let thunderTime = 0;
+ let sparklines = [];
+ let backgroundBrightness = 0;
+ let isRaining = true;
+ let rainToggle;
+ 
+ function setup() {
+   createCanvas(windowWidth, windowHeight);
+   for (let i = 0; i < 100; i++) {
+     drops.push(new Drop());
+   }
+ 
+   rainToggle = document.getElementById('rainToggle');
+   rainToggle.addEventListener('change', toggleRain);
+ }
+ 
+ function draw() {
+   background(backgroundBrightness);
+ 
+   if (isRaining) {
+     for (let i = 0; i < drops.length; i++) {
+       drops[i].fall();
+       drops[i].display();
+     }
+ 
+     if (millis() - thunderTime > random(5000, 6000)) {
+       thunderTime = millis();
+       sparklines.push(new Sparkline());
+       backgroundBrightness = 100;
+     }
+ 
+     for (let i = sparklines.length - 1; i >= 0; i--) {
+       sparklines[i].display();
+       if (sparklines[i].isFinished()) {
+         sparklines.splice(i, 1);
+       }
+     }
+ 
+     backgroundBrightness -= 1;
+   }
+ }
+ 
+ 
+ class Drop {
+   constructor() {
+     this.x = random(width);
+     this.y = random(-500, -50);
+     this.z = random(0, 20);
+     this.len = map(this.z, 0, 20, 10, 30);
+     this.yspeed = map(this.z, 0, 20, 1, 20);
+   }
+ 
+   fall() {
+     this.y += this.yspeed;
+ 
+     let grav = map(this.z, 0, 20, 0, 0.2);
+     this.yspeed += grav;
+ 
+     if (this.y > height) {
+       this.y = random(-200, -100);
+       this.yspeed = map(this.z, 0, 20, 1, 20);
+     }
+   }
+ 
+   display() {
+     let dropWidth = map(this.z, 0, 20, 1, 4);
+     let dropHeight = map(this.z, 0, 20, 10, 30);
+ 
+     noStroke();
+     fill(150, 150, 255);
+     ellipse(this.x, this.y, dropWidth, dropHeight);
+   }
+ }
+ 
+ class Sparkline {
+   constructor() {
+     this.x = random(width);
+     this.y = random(height / 2);
+     this.length = random(20, 100);
+     this.alpha = 255;
+     this.fadeSpeed = random(2, 4);
+   }
+ 
+   display() {
+     stroke(50, 50, 255, this.alpha);
+     strokeWeight(2);
+     line(this.x, this.y, this.x + this.length, this.y - this.length);
+     this.alpha -= this.fadeSpeed;
+   }
+ 
+   isFinished() {
+     return this.alpha <= 0;
+   }
+ }
+ 
+ function toggleRain() {
+   isRaining = !isRaining;
+   if (isRaining) {
+     rainButton.textContent = 'Stop Rain';
+   } else {
+     rainButton.textContent = 'Start Rain';
+   }
+ }
+ 
 
 
 // This is for the footer Names 
