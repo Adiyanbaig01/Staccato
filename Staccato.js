@@ -2,6 +2,105 @@ let currentAudio = null; // Stores the reference to the current audio element
 let intervalId = null; // Stores the interval ID for updating the current time
 let progressBar = document.getElementById('progressBar');
 let mouseDownOnSlider = false;
+let songs = [
+  {
+    url: 'Songs/Rema, Selena Gomez - Calm Down.mp3',
+    name: 'Calm Down'
+  },
+  {
+    url: 'Songs/Lord Huron - The Night We Met.mp3',
+    name: 'The Night We Met'
+  },
+  {
+    url: 'Songs/Harry Styles - Sign of the Times.mp3',
+    name: 'Sign of the Times'
+  },
+  {
+    url: 'Songs/Wiz Khalifa - See You Again ft. Charlie Puth.mp3',
+    name: 'See You Again'
+  },
+  {
+    url: 'Songs/One Direction - Night Changes.mp3',
+    name: 'Night Changes'
+  },
+  {
+    url: 'Songs/Steal My Girl - One Direction.mp3',
+    name: 'Sign of the Times'
+  },
+  {
+    url: 'Songs/Harry Styles - Sign of the Times.mp3',
+    name: 'Steal My Girl'
+  },
+  {
+    url: 'Songs/TaylorSwift-Enchanted.mp3',
+    name: 'Enchanted'
+  },
+  {
+    url: 'Songs/LoveStory.mp3',
+    name: 'Love Story'
+  },
+  {
+    url: 'Songs/TaylorSwift-Style.mp3',
+    name: 'Taylor Swift - Style'
+  },
+  {
+    url: 'Songs/Taylor Swift - Cruel Summer.mp3',
+    name: 'Cruel Summer'
+  },
+  {
+    url: 'Songs/TaylorSwift-IKnewYouWereTrouble.mp3',
+    name: 'I Knew You Were Trouble'
+  },
+  {
+    url: 'Songs/Taylor Swift - Blank Space.mp3',
+    name: 'Blank Space'
+  },
+  {
+    url: 'Songs/TaylorSwift-willow.mp3',
+    name: 'Taylor Swift - willow'
+  },
+  {
+    url: 'Songs/Taylor Swift - Shake It Off.mp3',
+    name: 'Shake It Off'
+  },
+  {
+    url: 'Songs/Apna Bana Le.mp3',
+    name: 'Apna Bana Le'
+  },
+  {
+    url: 'Songs/BLACKPINK - Dont know what to do MV.mp3',
+    name: 'Dont know what to do'
+  },
+  {
+    url: 'Songs/BlackPink-Stay.mp3',
+    name: 'BlackPink - Stay'
+  },
+  {
+    url: 'Songs/As If Its Your Last - BlackPink.mp3',
+    name: 'As If Its Your Last'
+  },
+  {
+    url: 'Songs/BLACKPINK Pink Venom.mp3',
+    name: 'Pink Venom'
+  },
+  {
+    url: 'Songs/The Happiest Girl.mp3',
+    name: 'The Happiest Girl'
+  },
+  {
+    url: 'Songs/BlackPink - Forever Young.mp3',
+    name: 'Forever Young'
+  },
+  {
+    url: 'Songs/Tally.mp3',
+    name: 'Blackpink - Tally'
+  },
+  {
+    url: 'Songs/BLACKPINK Crazy Over You.mp3',
+    name: 'Crazy Over You'
+  },
+];
+let currentSongIndex = 0;
 
 function playSong(songUrl, songName) {
   if (currentAudio) {
@@ -12,6 +111,16 @@ function playSong(songUrl, songName) {
   const audio = new Audio(songUrl);
   audio.play();
   currentAudio = audio;
+  
+  // finds the index of the currently playing song in the songs array and updates the currentSongIndex
+  currentSongIndex = songs.findIndex(song => song.url === songUrl); 
+
+  audio.addEventListener('ended', playNextSong);
+  
+
+  document.getElementById('songName').textContent = songName;
+
+  
 
   audio.addEventListener('loadedmetadata', function() {
     // Get the duration of the audio in seconds
@@ -366,3 +475,27 @@ function createFallingLine() {
 }
 
 setInterval(createFallingLine, 300); // Create new falling line every 200 milliseconds
+
+
+
+
+
+function playNextSong() {
+  currentSongIndex++;
+  if (currentSongIndex >= songs.length) {
+    currentSongIndex = 0;
+  }
+  const song = songs[currentSongIndex];
+  playSong(song.url, song.name);
+}
+
+function playPreviousSong() {
+  currentSongIndex--;
+  if (currentSongIndex < 0) {
+    currentSongIndex = songs.length - 1;
+  }
+  const song = songs[currentSongIndex];
+  playSong(song.url, song.name);
+}
+const initialSong = songs[currentSongIndex];
+playSong(initialSong.url, initialSong.name);
