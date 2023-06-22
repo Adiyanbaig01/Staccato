@@ -26,11 +26,15 @@ let songs = [
   },
   {
     url: 'Songs/Steal My Girl - One Direction.mp3',
-    name: 'Sign of the Times'
+    name: 'Steal My Girl'
   },
   {
-    url: 'Songs/Harry Styles - Sign of the Times.mp3',
-    name: 'Steal My Girl'
+    url: 'Songs/JVKE - golden hour (official music video).mp3',
+    name: 'Golden Hour'
+  },
+  {
+    url: 'Songs/JVKE - this is what falling in love feels like (Official Video).mp3',
+    name: 'This Is What Falling In Love Feels Like'
   },
   {
     url: 'Songs/TaylorSwift-Enchanted.mp3',
@@ -127,6 +131,70 @@ let songs = [
   {
     url: 'Songs/BLACKPINK Crazy Over You.mp3',
     name: 'Crazy Over You'
+  },
+  {
+    url: 'Songs/Tu Pehla Pehla Pyar hai Mera.mp3',
+    name: 'Pehla Pyaar'
+  },
+  {
+    url: 'songs/BOL DO NA ZARA.mp3',
+    name: 'Bol-Do-Na-Zara'
+  },
+  {
+    url: 'Songs/Ghar Se Nikalte Hi.mp3',
+    name: 'Ghar Se Nikalte Hi'
+  },
+  {
+    url: 'Songs/SAB TERA.mp3',
+    name: 'Sab Tera'
+  },
+  {
+    url: 'Songs/WAJAH TUM HO.mp3',
+    name: 'Wajha Tum Ho'
+  },
+  {
+    url: 'Songs/Hua Hain Aaj Pehli Baar.mp3',
+    name: 'Hua Hain Aaj Pehli Baar'
+  },
+  {
+    url: 'Songs/CHALE AANA.mp3',
+    name: 'Chale Aana'
+  },
+  {
+    url: 'Songs/Kehta Hai Pal Pal.mp3',
+    name: 'Kehta Hai Pal Pal'
+  },
+  {
+    url: 'Songs/Dil Ibadat.mp3',
+    name: 'Dil Ibadat'
+  },
+  {
+    url: 'Songs/Piya Aye Na.mp3',
+    name: 'Piya Aye Na'
+  },
+  {
+    url: 'Songs/Haan Tu Hain.mp3',
+    name: 'Haan Tu Hain'
+  },
+  {
+    url: 'Songs/KHUDA JAANE.mp3',
+    name: 'Khuda Jaane'
+  },
+  {
+    url: 'Songs/Zara Sa Audio Song.mp3',
+    name: 'Zara Sa'
+  },
+  {
+    url: 'Songs/Tu Hi Meri Shab Hai.mp3',
+    name: 'Tu Hi Mera Shab Hai'
+  },
+  {
+    url: 'Songs/Tu Jo Mila Lyrical Song.mp3',
+    name: 'Tu Jo Mila'
+  },
+  {
+    url: 'Songs/TUJHE SOCHTA HOON.mp3',
+    name: 'Tujhe Sochta Hoon'
   },
 ];
 let currentSongIndex = 0;
