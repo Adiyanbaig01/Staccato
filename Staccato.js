@@ -2,6 +2,7 @@ let currentAudio = null; // Stores the reference to the current audio element
 let intervalId = null; // Stores the interval ID for updating the current time
 let progressBar = document.getElementById('progressBar');
 let mouseDownOnSlider = false;
+let isFirstLoad = true; // Flag to check if it is the first time the page loads
 let songs = [
   {
     url: 'Songs/Rema, Selena Gomez - Calm Down.mp3',
@@ -109,7 +110,10 @@ function playSong(songUrl, songName) {
   }
 
   const audio = new Audio(songUrl);
-  audio.play();
+  // Check if it is the first time the page loads
+  if (!isFirstLoad) {
+    audio.play();
+  }
   currentAudio = audio;
   
   // finds the index of the currently playing song in the songs array and updates the currentSongIndex
@@ -156,6 +160,9 @@ function playSong(songUrl, songName) {
 
   // Call the displayCurrentTime function periodically
   intervalId = setInterval(displayCurrentTime, 100);
+  
+   // Reset the isFirstLoad flag after the first load
+   isFirstLoad = false;
 }
 
 function togglePlayPause() {
