@@ -527,7 +527,8 @@ const creators = [
   "Adiyan Baig",
   "Saniya Sayyad",
   "Sharvari Dekre",
-  "Pranay Rajkondawar",
+  "Nikhil Pahanpate",
+  "Yash Giradkar",
   "Saheba Sayyad"
 ];
 
