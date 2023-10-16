@@ -37,11 +37,11 @@ let songs = [
     name: 'This Is What Falling In Love Feels Like'
   },
   {
-    url: 'Songs/Taylor Swift - All Too Well.mp3',
+    url: 'Songs/Jawan_ Chaleya.mp3',
     name: 'Chaleya'
   },
   {
-    url: 'Songs/Jawan_ Chaleya.mp3',
+    url: 'Songs/Taylor Swift - All Too Well.mp3',
     name: 'All Too Well'
   },
   {
