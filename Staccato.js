@@ -5,6 +5,10 @@ let mouseDownOnSlider = false;
 let isFirstLoad = true; // Flag to check if it is the first time the page loads
 let songs = [
   {
+    url: 'Songs/Dancing With Your Ghost.mp3',
+    name: 'Dancing with your ghost'
+  },
+  {
     url: 'Songs/Rema, Selena Gomez - Calm Down.mp3',
     name: 'Calm Down'
   },
