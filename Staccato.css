@@ -2,6 +2,10 @@
   padding: 0;
   margin: 0;
 }
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: hsl(0, 0%, 7%);
   font-family: 'Montserrat', sans-serif;
@@ -11,7 +15,7 @@ body {
     font-family: "Gotham SSm A", "Gotham SSm B", "Helvetica Neue", Helvetica, Arial, sans-serif;
     max-height: 100vh;
     height: 100vh;
- 
+    user-select: none;
 }
 #top {
   float:right;
@@ -19,6 +23,9 @@ body {
   margin-top:-35px; 
 }
 
+.list{
+  -webkit-overflow-scrolling: touch;
+}
 
 .sidebar {
   position: fixed;
@@ -571,4 +578,34 @@ input:checked + .slider:before {
 }
 
 
+ 
 
+#searchContainer {
+  position: relative;
+}
+
+#searchInput {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: calc(100% - 20px); /* Adjust width as needed */
+  padding: 10px;
+  background: radial-gradient(circle, #41074d 0%, #1c0137 100%);
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  display: none;
+}
+
+#searchInput:focus {
+  outline: none;
+  box-shadow: 0 0 5px rgba(255, 255, 255, 0.5);
+}
+
+
+  /* CSS for Mobile Phones  */
+
+
+  @media only screen and (min-width: 455px) {
+        
+  }
