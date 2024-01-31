@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="Staccato.css">
   <link rel="icon" href="Logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
   <title>Staccato - Let's Listen Something Like Never Before </title>
 
 
@@ -24,17 +25,19 @@
     <div class="navigation">
       <ul>
         <li>
-          <a href="#">
+          <a href="#" onclick="scrollToTop()">
             <span class="fa fa-home"></span>
-            <span id="homeButton" style=" scroll-behavior: smooth;">Home</span>
+            <span>Home</span>
           </a>
         </li>
 
-        <li>
-          <a href="#">
+        <li id="searchContainer">
+          <a href="#" id="searchLink" onclick="toggleSearch()">
             <span class="fa fa-search"></span>
             <span>Search</span>
           </a>
+          <input type="text" id="searchInput" placeholder="Search..." oninput="filterPlaylists()" style="display: none;"
+            onblur="hideSearchInput()">
         </li>
 
         <li>
@@ -65,7 +68,7 @@
           <h4 style="color: #CACACA ; font-family: Arial, Helvetica, sans-serif;"> Rain Effect </h4>
           <br>
           <label class="toggle-button">
-            <input type="checkbox" id="rainToggle" checked>
+            <input type="checkbox" id="rainToggle">
             <span class="slider round"></span>
           </label>
 
@@ -91,6 +94,7 @@
 
   <div class="main-container">
     <div class="topbar">
+
       <div class="prev-next-buttons">
         <button type="button" class="fa fas fa-chevron-left"></button>
         <button type="button" class="fa fas fa-chevron-right"></button>
@@ -118,18 +122,19 @@
     <div class="spotify-playlists">
       <h2>Staccato Playlists</h2>
       <div class="list">
-        
+
         <div class="item">
           <img src="https://i.scdn.co/image/ab67616d0000b273141cf717cd3993690358a60c" />
           <div class="play">
-            <span class="fa fa-play" onclick="playSong('Songs/Dancing With Your Ghost.mp3','Dancing with your ghost')"></span>
+            <span class="fa fa-play"
+              onclick="playSong('Songs/Dancing With Your Ghost.mp3','Dancing with your ghost')"></span>
           </div>
           <h4>Dancing With Your Ghost</h4>
           <p>'I stay up all night
-             Tell myself I'm alright
-             Baby, you're just harder to see than most '</p>
+            Tell myself I'm alright
+            Baby, you're just harder to see than most '</p>
         </div>
-        
+
         <div class="item">
           <img src="https://i1.sndcdn.com/artworks-hvuPC7OQC2OBPDov-V1Ht2A-t500x500.jpg" />
           <div class="play">
@@ -142,7 +147,8 @@
         </div>
 
         <div class="item">
-          <img src="https://virtualpiano.net/wp-content/uploads/2020/11/The-Night-We-Met-13-Reasons-Why-Lord-Huron-Best-Online-Piano-Keyboard-Virtual-Piano.jpg" />
+          <img
+            src="https://virtualpiano.net/wp-content/uploads/2020/11/The-Night-We-Met-13-Reasons-Why-Lord-Huron-Best-Online-Piano-Keyboard-Virtual-Piano.jpg" />
           <div class="play">
             <span class="fa fa-play"
               onclick="playSong('Songs/Lord Huron - The Night We Met.mp3','The Night We Met')"></span>
@@ -204,7 +210,8 @@
         <div class="item">
           <img src="https://resources.tidal.com/images/24df3cde/8158/43c3/81d8/af526b318696/750x750.jpg" />
           <div class="play">
-            <span class="fa fa-play" onclick="playSong('Songs/JVKE - golden hour (official music video).mp3','Golden Hour')"></span>
+            <span class="fa fa-play"
+              onclick="playSong('Songs/JVKE - golden hour (official music video).mp3','Golden Hour')"></span>
           </div>
           <h4> Golden Hour </h4>
           <p>I was all alone with the love of my life
@@ -215,16 +222,18 @@
         </div>
 
         <div class="item">
-          <img src="https://is2-ssl.mzstatic.com/image/thumb/Music122/v4/33/9d/f2/339df25b-1f4c-2715-bc07-eb9c144c96ba/5056167176534_1.jpg/1200x1200bb.jpg" />
+          <img
+            src="https://is2-ssl.mzstatic.com/image/thumb/Music122/v4/33/9d/f2/339df25b-1f4c-2715-bc07-eb9c144c96ba/5056167176534_1.jpg/1200x1200bb.jpg" />
           <div class="play">
-            <span class="fa fa-play" onclick="playSong('Songs/JVKE - this is what falling in love feels like (Official Video).mp3','This Is What Falling In Love Feels Like ')"></span>
+            <span class="fa fa-play"
+              onclick="playSong('Songs/JVKE - this is what falling in love feels like (Official Video).mp3','This Is What Falling In Love Feels Like ')"></span>
           </div>
           <h4>This is what falling in love feels like</h4>
           <p>I know it sounds super cliché
             But you make me feel some type of way
             This is falling, falling in love</p>
         </div>
-      
+
 
         <div class="item">
           <img src="https://c.saavncdn.com/026/Chaleya-From-Jawan-Hindi-2023-20230814014337-500x500.jpg" />
@@ -233,19 +242,20 @@
           </div>
           <h4> Chaleya </h4>
           <p>Oh Main Taan Chaleya Teri Oar
-              Tera Chaleya Hai Zor
-              Tera Hoya Main Yaar Ve
-                Bhuleya Ae Sansaar Ve </p>
+            Tera Chaleya Hai Zor
+            Tera Hoya Main Yaar Ve
+            Bhuleya Ae Sansaar Ve </p>
         </div>
 
-      <div class="item">
+        <div class="item">
           <img src="https://glasgowguardian.co.uk/wp-content/uploads/sites/2/2021/12/R.png" />
           <div class="play">
-              <span class="fa fa-play" onclick="playSong('Songs/Taylor Swift - All Too Well.mp3','Taylor Swift - All Too Well')"></span>
+            <span class="fa fa-play"
+              onclick="playSong('Songs/Taylor Swift - All Too Well.mp3','Taylor Swift - All Too Well')"></span>
           </div>
           <h4>All Too Well</h4>
           <p>'Down the stairs, you were there, you remember it all
-It was rare, I was there, I remember it all too well'</p>
+            It was rare, I was there, I remember it all too well'</p>
         </div>
 
         <div class="item">
@@ -391,8 +401,7 @@ It was rare, I was there, I remember it all too well'</p>
         </div>
 
         <div class="item">
-          <img
-            src="https://i.scdn.co/image/ab67616d00001e02ece89c7bf7d8141a1e8eef42" />
+          <img src="https://i.scdn.co/image/ab67616d00001e02ece89c7bf7d8141a1e8eef42" />
           <div class="play">
             <span class="fa fa-play" onclick="playSong('Songs/Ik Vaari Aa.mp3','Ek Vaari Aa ')"></span>
           </div>
@@ -404,7 +413,8 @@ It was rare, I was there, I remember it all too well'</p>
         </div>
 
         <div class="item">
-          <img src="https://m.media-amazon.com/images/M/MV5BN2Y0YjJkMTctNjNmMC00MDkyLTkzZDktMWZmNTdmN2YyNWNmXkEyXkFqcGdeQXVyMTA5NzIyMDY5._V1_.jpg">
+          <img
+            src="https://m.media-amazon.com/images/M/MV5BN2Y0YjJkMTctNjNmMC00MDkyLTkzZDktMWZmNTdmN2YyNWNmXkEyXkFqcGdeQXVyMTA5NzIyMDY5._V1_.jpg">
           <div class="play">
             <span class="fa fa-play" onclick="playSong('Songs/Khairiyat.mp3','Khairiyat')"></span>
           </div>
@@ -428,7 +438,8 @@ It was rare, I was there, I remember it all too well'</p>
         </div>
 
         <div class="item">
-          <img src="https://c.saavncdn.com/172/Shayad-Film-Version-From-Love-Aaj-Kal--Hindi-2021-20210325204139-500x500.jpg" />
+          <img
+            src="https://c.saavncdn.com/172/Shayad-Film-Version-From-Love-Aaj-Kal--Hindi-2021-20210325204139-500x500.jpg" />
           <div class="play">
             <span class="fa fa-play" onclick="playSong('Songs/Shayad.mp3',' Arijit Singh - Shayad ')"></span>
           </div>
@@ -452,7 +463,8 @@ It was rare, I was there, I remember it all too well'</p>
         <div class="item">
           <img src="https://i1.sndcdn.com/artworks-f48j8UFVEcQIocrq-sHMNbw-t500x500.jpg" />
           <div class="play">
-            <span class="fa fa-play" onclick="playSong('Songs/Arijit Singh_ Phir Aur Kya Chahiye.mp3','Phir Aur Kya Chahiye')"></span>
+            <span class="fa fa-play"
+              onclick="playSong('Songs/Arijit Singh_ Phir Aur Kya Chahiye.mp3','Phir Aur Kya Chahiye')"></span>
           </div>
           <h4>Phir Aur Kya Chahiye</h4>
           <p>'Tu Hai Toh Mujhe
@@ -562,8 +574,8 @@ It was rare, I was there, I remember it all too well'</p>
         </div>
       </div>
     </div>
-    
-     
+
+
     <div class="spotify-playlists">
       <h2>Armaan Malik</h2>
 
@@ -579,8 +591,7 @@ It was rare, I was there, I remember it all too well'</p>
         </div>
 
         <div class="item">
-          <img
-            src="https://c.saavncdn.com/709/Bol-Do-Na-Zara-Instrumental-Hindi-2018-20181221231527-500x500.jpg"/>
+          <img src="https://c.saavncdn.com/709/Bol-Do-Na-Zara-Instrumental-Hindi-2018-20181221231527-500x500.jpg" />
           <div class="play" onclick="playSong('songs/BOL DO NA ZARA.mp3','Bol-Do-Na-Zara')">
             <span class="fa fa-play" onclick="playSong('')"></span>
           </div>
@@ -591,8 +602,7 @@ It was rare, I was there, I remember it all too well'</p>
         </div>
 
         <div class="item">
-          <img
-            src="https://c.saavncdn.com/098/Ghar-Se-Nikalte-Hi-Hindi-2018-20180407081907-500x500.jpg">
+          <img src="https://c.saavncdn.com/098/Ghar-Se-Nikalte-Hi-Hindi-2018-20180407081907-500x500.jpg">
           <div class="play">
             <span class="fa fa-play" onclick="playSong('Songs/Ghar Se Nikalte Hi.mp3','Ghar Se Nikalte Hi')"></span>
           </div>
@@ -603,8 +613,7 @@ It was rare, I was there, I remember it all too well'</p>
         </div>
 
         <div class="item">
-          <img
-            src="https://i1.sndcdn.com/artworks-000151944028-4wrwk3-t500x500.jpg" />
+          <img src="https://i1.sndcdn.com/artworks-000151944028-4wrwk3-t500x500.jpg" />
           <div class="play">
             <span class="fa fa-play" onclick="playSong('Songs/SAB TERA.mp3','Sab Tera')"></span>
           </div>
@@ -617,8 +626,7 @@ It was rare, I was there, I remember it all too well'</p>
         </div>
 
         <div class="item">
-          <img
-            src="https://c.saavncdn.com/590/Wajah-Tum-Ho-Hindi-2016-500x500.jpg">
+          <img src="https://c.saavncdn.com/590/Wajah-Tum-Ho-Hindi-2016-500x500.jpg">
           <div class="play">
             <span class="fa fa-play" onclick="playSong('Songs/WAJAH TUM HO.mp3','Wajha Tum Ho ')"></span>
           </div>
@@ -632,7 +640,8 @@ It was rare, I was there, I remember it all too well'</p>
           <img
             src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA_5KIFuz7X_XFipxTXBip9QQX1uv1YaFapwq-iyzkHIlv6YXSzmYJHv3tpad62TceXj0&usqp=CAU">
           <div class="play">
-            <span class="fa fa-play" onclick="playSong('Songs/Hua Hain Aaj Pehli Baar.mp3','Hua Hain Aaj Pehli Baar')"></span>
+            <span class="fa fa-play"
+              onclick="playSong('Songs/Hua Hain Aaj Pehli Baar.mp3','Hua Hain Aaj Pehli Baar')"></span>
           </div>
           <h4>Hua Hai Aaj Pehli Baar</h4>
           <p>'Hua hai aaj pehli baar
@@ -662,7 +671,7 @@ It was rare, I was there, I remember it all too well'</p>
         </div>
       </div>
     </div>
-    
+
 
     <div class="spotify-playlists">
       <h2> KK </h2>
@@ -685,8 +694,8 @@ It was rare, I was there, I remember it all too well'</p>
           </div>
           <h4>Piya Aye Na</h4>
           <p>'Woh piya aaye na
-              Woh Piya aaye na
-              Piya aaye na woh piya aaye na...'</p>
+            Woh Piya aaye na
+            Piya aaye na woh piya aaye na...'</p>
         </div>
 
         <div class="item">
@@ -716,7 +725,8 @@ It was rare, I was there, I remember it all too well'</p>
 
 
         <div class="item">
-          <img src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/17/47/fd/1747fd5c-354b-6dc5-c43c-a0e8fa9b8943/cover.jpg/400x400cc.jpg" />
+          <img
+            src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/17/47/fd/1747fd5c-354b-6dc5-c43c-a0e8fa9b8943/cover.jpg/400x400cc.jpg" />
           <div class="play">
             <span class="fa fa-play" onclick="playSong('Songs/Zara Sa Audio Song.mp3','Zara Sa')"></span>
           </div>
@@ -727,7 +737,7 @@ It was rare, I was there, I remember it all too well'</p>
             Zara sa yaadon mein basa...'</p>
         </div>
 
-        
+
         <div class="item">
           <img
             src="https://i0.wp.com/99lyricstore.com/wp-content/uploads/2021/04/Tu2Bhi2Bmeri2Bshab2Bhai2BHindi2BLove2BSong2BLyrics252C2BSung2BBy2BK.K.jpg" />
@@ -742,7 +752,8 @@ It was rare, I was there, I remember it all too well'</p>
         </div>
 
         <div class="item">
-          <img src="https://c-cl.cdn.smule.com/smule-gg-s-sf-bck2/arr/9c/d4/54d47378-d960-482b-9395-f13ac5e3395d_1024.jpg" />
+          <img
+            src="https://c-cl.cdn.smule.com/smule-gg-s-sf-bck2/arr/9c/d4/54d47378-d960-482b-9395-f13ac5e3395d_1024.jpg" />
           <div class="play">
             <span class="fa fa-play" onclick="playSong('Songs/Tu Jo Mila Lyrical Song.mp3','Tu Jo Mila ')"></span>
           </div>
@@ -881,15 +892,17 @@ It was rare, I was there, I remember it all too well'</p>
         <img src="assets/Lyrics.svg" alt="">
         <img src="assets/Queue.svg" class="filtered-img" alt="">
         <img src="assets/Connect to a device.svg" class="filtered-img" alt="">
-        <img src="assets/Volume.svg" class="filtered-img" alt="">
+        <img src="assets/Volume.svg" id="volumeIcon" class="filtered-img" alt="">
         <div class="player-slider" style="margin-right: 20px; width: 200px;">
           <input type="range" min="0" max="100" value="100" id="progressBarVolume"
-            style="width:75px; position: relative; top:-5px;">
+            style="width: 75px; position: relative; top: -5px;">
         </div>
+        
         <img src="assets/Full screen.svg" class="filtered-img" alt="">
       </div>
     </div>
   </div>
+
 
   <footer class="footer-color" id="falling-lines">
     <div class="falling-line"></div>
