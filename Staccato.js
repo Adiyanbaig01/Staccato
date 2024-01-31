@@ -326,13 +326,38 @@ function updatePlayPauseIcon(state) {
     playPauseIcon.src = 'assets/Play.svg';
   }
 }
-// Add the event listener for the progressBar input event
+
+// Below Program is for Volume Control of the website ----- >>
+
+
+let progressBarVolume = document.getElementById('progressBarVolume');
+let volumeIcon = document.getElementById('volumeIcon');
+
+function updateVolumeIcon() {
+  if (currentAudio.muted || progressBarVolume.value == 0) {
+    volumeIcon.src = 'assets/VolumeCut.svg';  // Replace with the actual path to your no volume icon
+  } else {
+    volumeIcon.src = 'assets/Volume.svg';  // Replace with the actual path to your volume icon
+  }
+}
+// Add the event listener for the volume icon click event
+volumeIcon.addEventListener('click', function () {
+  if (currentAudio) {
+    if (currentAudio.muted || progressBarVolume.value == 0) {
+      progressBarVolume.value = 100;
+    } else {
+      progressBarVolume.value = 0;
+    }
+    updateVolumeIcon();
+  }
+});
+// Add the event listener for the progressBarVolume input event
 progressBarVolume.addEventListener('input', function () {
   const volume = progressBarVolume.value / 100;
   currentAudio.volume = volume;
+  updateVolumeIcon();
 });
-
-// Add the event listener for the progressBar change event
+// Add the event listener for the progressBarVolume change event
 progressBarVolume.addEventListener('change', function () {
   const volume = progressBarVolume.value / 100;
   currentAudio.volume = volume;
@@ -344,7 +369,26 @@ progressBarVolume.addEventListener('change', function () {
     // Unmute the audio
     currentAudio.muted = false;
   }
+  updateVolumeIcon();
 });
+volumeIcon.addEventListener('click', function () {
+  console.log("Clicked on volume icon");
+
+  if (currentAudio) {
+    // Toggle between mute and unmute
+    currentAudio.muted = !currentAudio.muted;
+
+    // Set volume slider value accordingly
+    progressBarVolume.value = currentAudio.muted ? 0 : 100;
+
+    // Update the volume icon
+    updateVolumeIcon();
+  }
+});
+
+
+
+
 
 
 
@@ -414,15 +458,13 @@ let drops = [];
 let thunderTime = 0;
 let sparklines = [];
 let backgroundBrightness = 0;
-let isRaining = true;
+let isRaining = false;
 let rainToggle;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  for (let i = 0; i < 100; i++) {
-    drops.push(new Drop());
-  }
-
+  generateDrops();
+  
   rainToggle = document.getElementById('rainToggle');
   rainToggle.addEventListener('change', toggleRain);
 }
@@ -438,8 +480,10 @@ function draw() {
 
     if (millis() - thunderTime > random(5000, 6000)) {
       thunderTime = millis();
-      sparklines.push(new Sparkline());
-      backgroundBrightness = 100;
+      if (sparklines.length < 5) { // Limit the number of sparklines
+        sparklines.push(new Sparkline());
+        backgroundBrightness = 100;
+      }
     }
 
     for (let i = sparklines.length - 1; i >= 0; i--) {
@@ -453,6 +497,12 @@ function draw() {
   }
 }
 
+function generateDrops() {
+  for (let i = 0; i < 100; i++) {
+    drops.push(new Drop());
+  }
+}
+
 class Drop {
   constructor() {
     this.x = random(width);
@@ -460,6 +510,8 @@ class Drop {
     this.z = random(0, 20);
     this.len = map(this.z, 0, 20, 10, 30);
     this.yspeed = map(this.z, 0, 20, 1, 20);
+    this.dropWidth = map(this.z, 0, 20, 1, 4);
+    this.dropHeight = map(this.z, 0, 20, 10, 30);
   }
 
   fall() {
@@ -469,18 +521,19 @@ class Drop {
     this.yspeed += grav;
 
     if (this.y > height) {
-      this.y = random(-200, -100);
-      this.yspeed = map(this.z, 0, 20, 1, 20);
+      this.resetDrop();
     }
   }
 
-  display() {
-    let dropWidth = map(this.z, 0, 20, 1, 4);
-    let dropHeight = map(this.z, 0, 20, 10, 30);
+  resetDrop() {
+    this.y = random(-200, -100);
+    this.yspeed = map(this.z, 0, 20, 1, 20);
+  }
 
+  display() {
     noStroke();
     fill(150, 150, 255);
-    ellipse(this.x, this.y, dropWidth, dropHeight);
+    ellipse(this.x, this.y, this.dropWidth, this.dropHeight);
   }
 }
 
@@ -509,22 +562,20 @@ function toggleRain() {
   isRaining = !isRaining;
 
   if (isRaining) {
-    // Regenerate drops
-    drops = [];
-    for (let i = 0; i < 100; i++) {
-      drops.push(new Drop());
-    }
-
-    // Reset thunder time, sparklines, and background brightness
+    generateDrops();
     thunderTime = 0;
     sparklines = [];
     backgroundBrightness = 0;
   } else {
-    // Clear existing drops and sparklines
     drops = [];
     sparklines = [];
     backgroundBrightness = 0;
   }
+}
+
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight);
+  generateDrops();
 }
 
 
@@ -576,26 +627,6 @@ setTimeout(type, 1000);
 
 
 
-// Code For the falling Lines 
-const container = document.getElementById("falling-lines");
-
-function createFallingLine() {
-  const line = document.createElement("div");
-  line.classList.add("falling-line");
-  line.style.left = Math.random() * 100 + "%";
-  container.appendChild(line);
-
-  line.addEventListener("animationend", () => {
-    container.removeChild(line);
-  });
-}
-
-setInterval(createFallingLine, 300); // Create new falling line every 200 milliseconds
-
-
-
-
-
 function playNextSong() {
   currentSongIndex++;
   if (currentSongIndex >= songs.length) {
@@ -615,3 +646,118 @@ function playPreviousSong() {
 }
 const initialSong = songs[currentSongIndex];
 playSong(initialSong.url, initialSong.name);
+
+
+// Code for scrolling the cards 
+
+function makeListScrollable(list) {
+  let isGrabbing = false;
+  let startX;
+  let scrollLeft;
+
+  list.addEventListener('mousedown', handleStart);
+  list.addEventListener('touchstart', handleStart);
+
+  function handleStart(e) {
+    isGrabbing = true;
+    startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+    scrollLeft = list.scrollLeft;
+
+    list.addEventListener('mousemove', handleMove);
+    list.addEventListener('touchmove', handleMove);
+    list.addEventListener('mouseup', handleEnd);
+    list.addEventListener('touchend', handleEnd);
+    list.addEventListener('mouseleave', handleEnd);
+  }
+
+  function handleMove(e) {
+    if (!isGrabbing) return;
+    const x = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+    const walk = (x - startX) * 1.5; // Adjust scroll speed if needed
+    list.scrollLeft = scrollLeft - walk;
+  }
+
+  function handleEnd() {
+    isGrabbing = false;
+    list.removeEventListener('mousemove', handleMove);
+    list.removeEventListener('touchmove', handleMove);
+    list.removeEventListener('mouseup', handleEnd);
+    list.removeEventListener('touchend', handleEnd);
+    list.removeEventListener('mouseleave', handleEnd);
+  }
+}
+
+// Apply the scroll functionality to all lists with the 'list' class
+const lists = document.querySelectorAll('.list');
+lists.forEach(makeListScrollable);
+
+
+
+
+
+
+
+
+// Code for searching Songs 
+
+function filterPlaylists() {
+  var input, filter, playlists, item, title, i, txtValue;
+  input = document.getElementById("searchInput");
+  filter = input.value.toUpperCase();
+  playlists = document.querySelectorAll(".item");
+
+  playlists.forEach(function (item) {
+    title = item.querySelector("h4");
+    txtValue = title.textContent || title.innerText;
+
+    // Check if the playlist title contains the filter text
+    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+      item.style.display = "";
+    } else {
+      item.style.display = "none";
+    }
+  });
+
+  // Hide or show the playlist headings based on the search filter
+  var headings = document.querySelectorAll(".spotify-playlists h2");
+  headings.forEach(function (heading) {
+    var playlistItems = heading.nextElementSibling.querySelectorAll(".item");
+    var visiblePlaylists = Array.from(playlistItems).filter(
+      (item) => item.style.display !== "none"
+    );
+
+    if (visiblePlaylists.length > 0) {
+      heading.style.display = "";
+    } else {
+      heading.style.display = "none";
+    }
+  });
+}
+
+
+
+function toggleSearch() {
+  var searchInput = document.getElementById("searchInput");
+  var searchContainer = document.getElementById("searchContainer");
+
+  // Toggle the display of the search input
+  searchInput.style.display = (searchInput.style.display === "none" || searchInput.style.display === "") ? "block" : "none";
+
+  // If the search input is displayed, focus on it; otherwise, hide it
+  if (searchInput.style.display === "block") {
+    searchInput.focus();
+  } else {
+    searchContainer.blur();
+  }
+}
+function hideSearchInput() {
+  var searchInput = document.getElementById("searchInput");
+  searchInput.style.display = "none";
+}
+
+
+ // JavaScript function to scroll smoothly to the top
+ function scrollToTop() {
+  document.body.scrollTop = 0;         // For Safari
+  document.documentElement.scrollTop = 0;  // For Chrome, Firefox, IE, and Opera
+}
