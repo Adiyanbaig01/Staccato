@@ -81,6 +81,10 @@ let songs = [
     name: 'Shake It Off'
   },
   {
+    url: 'Songs/Taylor Swift - Anti-Hero.mp3',
+    name: 'Anti-Hero'
+  },
+  {
     url: 'Songs/Apna Bana Le.mp3',
     name: 'Apna Bana Le'
   },
@@ -673,7 +677,7 @@ function makeListScrollable(list) {
   function handleMove(e) {
     if (!isGrabbing) return;
     const x = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-    const walk = (x - startX) * 1.5; // Adjust scroll speed if needed
+    const walk = (x - startX) * 1; // Adjust scroll speed if needed
     list.scrollLeft = scrollLeft - walk;
   }
 
@@ -761,3 +765,31 @@ function hideSearchInput() {
   document.body.scrollTop = 0;         // For Safari
   document.documentElement.scrollTop = 0;  // For Chrome, Firefox, IE, and Opera
 }
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Get references to loader elements
+  var loaderContainer = document.getElementById('loaderContainer');
+  var loadingElement = document.getElementById('loadingElement');
+
+  // Listen for the 'animationend' event on the loading element
+  loadingElement.addEventListener('animationend', function () {
+    // Hide the loader when the animation ends
+    loaderContainer.style.display = 'none';
+  });
+});
+
+
+document.addEventListener('DOMContentLoaded', function () {
+  var loaderBg = document.querySelector('.loaderbg');
+
+  // Trigger the fade-out effect after a delay
+  setTimeout(function () {
+    loaderBg.classList.add('fade-out');
+  }, 2000); // 2000 milliseconds (2 seconds) in this example
+
+  // Remove loader after transition ends
+  loaderBg.addEventListener('transitionend', function () {
+    loaderBg.style.display = 'none';
+  });
+});
