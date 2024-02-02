@@ -7,6 +7,65 @@ html {
 }
 
 body {
+  transition: opacity 1s ease; /* Set the transition property */
+}
+
+body {
+  opacity: 1;
+  transition: opacity 1s ease;
+}
+
+.loaderbg {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 101;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  background-color: black;
+  opacity: 1;
+  transition: opacity 1.5s ease;
+}
+
+.loader {
+  width: 150px;
+  height: 150px;
+  border-radius: 100%;
+  background: linear-gradient(transparent 40%, rgb(115, 0, 181));
+  animation: animate 1.9s linear infinite;
+}
+
+.loader:before {
+  content: '';
+  position: absolute;
+  top: 6px;
+  bottom: 6px;
+  left: 6px;
+  right: 6px;
+  background-color: black;
+  border-radius: 100%;
+  z-index: 2;
+}
+
+@keyframes animate {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.fade-out {
+  opacity: 0;
+}
+
+
+
+body {
   background-color: hsl(0, 0%, 7%);
   font-family: 'Montserrat', sans-serif;
   box-sizing: border-box;
@@ -398,7 +457,10 @@ canvas {
 
    /* For The Water DropLets Code Ends Here  */
 
-
+#img{
+   width: 160px;
+   height: 28px;
+}
 
  footer {
   background-color: hsl(0, 0%, 7%);
