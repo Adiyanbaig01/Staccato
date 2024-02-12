@@ -5,217 +5,329 @@ let mouseDownOnSlider = false;
 let isFirstLoad = true; // Flag to check if it is the first time the page loads
 let songs = [
   {
+    url: '',
+    name: 'No Track Playing',
+    imgUrl: 'Images/null.png', // Add image URL for the song
+    artist:'Pick Your Song' // Add artist name for the song
+  },
+  {
     url: 'Songs/Dancing With Your Ghost.mp3',
-    name: 'Dancing with your ghost'
+    name: 'Dancing with your ghost',
+    imgUrl: 'https:/'+'/i.scdn.co/image/ab67616d0000b273141cf717cd3993690358a60c',
+    artist:'Sasha Alex Sloan'
   },
   {
     url: 'Songs/Rema, Selena Gomez - Calm Down.mp3',
-    name: 'Calm Down'
+    name: 'Calm Down',
+    imgUrl: 'https:/'+'/i1.sndcdn.com/artworks-hvuPC7OQC2OBPDov-V1Ht2A-t500x500.jpg',  
+    artist:'Rema, Selena Gomez'
   },
   {
     url: 'Songs/Lord Huron - The Night We Met.mp3',
-    name: 'The Night We Met'
+    name: 'The Night We Met',
+    imgUrl: 'https:/'+'/virtualpiano.net/wp-content/uploads/2020/11/The-Night-We-Met-13-Reasons-Why-Lord-Huron-Best-Online-Piano-Keyboard-Virtual-Piano.jpg',  
+    artist:'Lord Huron'
   },
   {
     url: 'Songs/Harry Styles - Sign of the Times.mp3',
-    name: 'Sign of the Times'
+    name: 'Sign of the Times',
+    imgUrl: 'https:/'+'/i1.sndcdn.com/artworks-J3lCZyx8keOpfR1y-PAzksA-t500x500.jpg',  
+    artist:'Harry Styles'
   },
   {
     url: 'Songs/Wiz Khalifa - See You Again ft. Charlie Puth.mp3',
-    name: 'See You Again'
+    name: 'See You Again',
+    imgUrl:'https:/'+'/i1.sndcdn.com/artworks-000116177725-alap1o-t500x500.jpg',  
+    artist:'Wiz Khalifa ft. Charlie Puth'
   },
   {
     url: 'Songs/One Direction - Night Changes.mp3',
-    name: 'Night Changes'
+    name: 'Night Changes',
+    imgUrl:'https:/'+'/preview.redd.it/night-changes-has-now-surpassed-1-billion-streams-on-v0-7zn2xd70u7ua1.jpg?width=640&crop=smart&auto=webp&s=d1a2172d731d137d933b00348baa083046243414',  
+    artist:'One Direction'
   },
   {
     url: 'Songs/Steal My Girl - One Direction.mp3',
-    name: 'Steal My Girl'
+    name: 'Steal My Girl',
+    imgUrl:'https:/'+'/i1.sndcdn.com/artworks-000132598634-ui94jo-t500x500.jpg',  
+    artist:'One Direction'
+
   },
   {
     url: 'Songs/JVKE - golden hour (official music video).mp3',
-    name: 'Golden Hour'
+    name: 'Golden Hour',
+    imgUrl:'https:/'+'/resources.tidal.com/images/24df3cde/8158/43c3/81d8/af526b318696/750x750.jpg',  
+    artist:' JVKE '
   },
   {
     url: 'Songs/JVKE - this is what falling in love feels like (Official Video).mp3',
-    name: 'This Is What Falling In Love Feels Like'
+    name: 'This Is What Falling In Love Feels Like',
+    imgUrl:'https:/'+'/is2-ssl.mzstatic.com/image/thumb/Music122/v4/33/9d/f2/339df25b-1f4c-2715-bc07-eb9c144c96ba/5056167176534_1.jpg/1200x1200bb.jpg',  
+    artist:' JVKE '
   },
   {
     url: 'Songs/Jawan_ Chaleya.mp3',
-    name: 'Chaleya'
+    name: 'Chaleya',
+    imgUrl:'https:/'+'/c.saavncdn.com/026/Chaleya-From-Jawan-Hindi-2023-20230814014337-500x500.jpg',  
+    artist:'Arijit Singh and Shilpa Rao'
   },
   {
     url: 'Songs/Taylor Swift - All Too Well.mp3',
-    name: 'All Too Well'
+    name: 'All Too Well',
+    imgUrl:'https:/'+'/glasgowguardian.co.uk/wp-content/uploads/sites/2/2021/12/R.png',  
+    artist:'Taylor Swift'
   },
   {
     url: 'Songs/TaylorSwift-Enchanted.mp3',
-    name: 'Enchanted'
+    name: 'Enchanted',
+    imgUrl:'https:/'+'/img.buzzfeed.com/buzzfeed-static/static/2018-04/16/10/asset/buzzfeed-prod-web-04/sub-buzz-16652-1523887341-1.jpg?downsize=700%3A%2A&output-quality=auto&output-format=auto',  
+    artist:'Taylor Swift'
+
   },
   {
     url: 'Songs/LoveStory.mp3',
-    name: 'Love Story'
+    name: 'Love Story',
+    imgUrl:'https:/'+'/t2.genius.com/unsafe/425x425/https%3A%2F%2Fimages.genius.com%2Fefccf69ab98db616b9c315e632383028.600x600x1.jpg',  
+    artist:'Taylor Swift'
   },
   {
     url: 'Songs/TaylorSwift-Style.mp3',
-    name: 'Taylor Swift - Style'
+    name: 'Taylor Swift - Style',
+    imgUrl:'https:/'+'/i.pinimg.com/originals/a1/49/8d/a1498d7006fe729cde733e554229fcd7.jpg',  
+    artist:'Taylor Swift'
   },
   {
     url: 'Songs/Taylor Swift - Cruel Summer.mp3',
-    name: 'Cruel Summer'
+    name: 'Cruel Summer',
+    imgUrl:'https:/'+'/images.squarespace-cdn.com/content/v1/5c462fd0c3c16a9eac57b7ca/1683482334138-8WU0VWN3H0T9Q402LSFX/20230610_CruelSummer_Square.jpg',  
+    artist:'Taylor Swift'
   },
   {
     url: 'Songs/TaylorSwift-IKnewYouWereTrouble.mp3',
-    name: 'I Knew You Were Trouble'
+    name: 'I Knew You Were Trouble',
+    imgUrl:'https:/'+'/upload.wikimedia.org/wikipedia/en/7/70/I_Knew_You_Were_Trouble.png',  
+    artist:'Taylor Swift'
   },
   {
     url: 'Songs/Taylor Swift - Blank Space.mp3',
-    name: 'Blank Space'
+    name: 'Blank Space',
+    imgUrl:'https:/'+'/pbs.twimg.com/media/EV1n5ARWoAMqQgc.jpg:large',  
+    artist:'Taylor Swift'
   },
   {
     url: 'Songs/TaylorSwift-willow.mp3',
-    name: 'Taylor Swift - willow'
+    name: 'Taylor Swift - willow',
+    imgUrl:'https:/'+'/i.scdn.co/image/ab67616d0000b27325751b4b32829d6bbfe6be7f',  
+    artist:'Taylor Swift'
   },
   {
     url: 'Songs/Taylor Swift - Shake It Off.mp3',
-    name: 'Shake It Off'
+    name: 'Shake It Off',
+    imgUrl:'https:/'+'/i.pinimg.com/736x/68/40/d0/6840d0fdf5e62e492fb6ef2d8341399a.jpg',  
+    artist:'Taylor Swift'
   },
   {
     url: 'Songs/Taylor Swift - Anti-Hero.mp3',
-    name: 'Anti-Hero'
+    name: 'Anti-Hero',
+    imgUrl:'https:/'+'/pbs.twimg.com/media/Ff6oM20XEAExqha.jpg',  
+    artist:'Taylor Swift'
   },
   {
     url: 'Songs/Apna Bana Le.mp3',
-    name: 'Apna Bana Le'
+    name: 'Apna Bana Le',
+    imgUrl:'https:/'+'/i0.wp.com/99lyricstore.com/wp-content/uploads/2022/11/Apna-Bana-Le-Lyrics-Arijit-Singh.jpg',  
+    artist:' Arijit singh '
   },
   {
     url: 'Songs/hawayein.mp3',
-    name: 'Arijit Singh - Hawayein'
+    name: 'Arijit Singh - Hawayein',
+    imgUrl:'https:/'+'/i.scdn.co/image/ab67616d0000b2730f29b052ea18eb757ec7ca9a',  
+    artist:' Arijit singh '
   },
   {
     url: 'Songs/Ik Vaari Aa.mp3',
-    name: 'Ek Vaari Aa'
+    name: 'Ek Vaari Aa',
+    imgUrl:'https:/'+'/i.scdn.co/image/ab67616d00001e02ece89c7bf7d8141a1e8eef42',  
+    artist:' Arijit singh '
   },
   {
     url: 'Songs/Khairiyat.mp3',
-    name: 'Khairiyat'
+    name: 'Khairiyat',
+    imgUrl:'https:/'+'/m.media-amazon.com/images/M/MV5BN2Y0YjJkMTctNjNmMC00MDkyLTkzZDktMWZmNTdmN2YyNWNmXkEyXkFqcGdeQXVyMTA5NzIyMDY5._V1_.jpg',  
+    artist:' Arijit singh '
   },
   {
     url: 'Songs/Kesariya.mp3',
-    name: 'Arijit Singh - Kesariya'
+    name: 'Arijit Singh - Kesariya',
+    imgUrl:'https:/'+'/c.saavncdn.com/191/Kesariya-From-Brahmastra-Hindi-2022-20220717092820-500x500.jpg',  
+    artist:' Arijit singh '
   },
   {
     url: 'Songs/Shayad.mp3',
-    name: ' Arijit Singh - Shayad '
+    name: ' Arijit Singh - Shayad ',
+    imgUrl:'https:/'+'/c.saavncdn.com/172/Shayad-Film-Version-From-Love-Aaj-Kal--Hindi-2021-20210325204139-500x500.jpg',  
+    artist:' Arijit singh '
   },
   {
     url: 'Songs/Zaalima.mp3',
-    name: 'Arijit Singh - Zaalima '
+    name: 'Arijit Singh - Zaalima ',
+    imgUrl:'https:/'+'/upload.wikimedia.org/wikipedia/en/9/9b/Zaalima_Raees_Cover.jpg',  
+    artist:' Arijit singh '
   },
   {
     url: 'Songs/Arijit Singh_ Phir Aur Kya Chahiye.mp3',
-    name: 'Phir Aur Kya Chahiye'
+    name: 'Phir Aur Kya Chahiye',
+    imgUrl:'https:/'+'/i1.sndcdn.com/artworks-f48j8UFVEcQIocrq-sHMNbw-t500x500.jpg',  
+    artist:' Arijit singh '
   },
   {
     url: 'Songs/BLACKPINK - Dont know what to do MV.mp3',
-    name: 'Dont know what to do'
+    name: 'Dont know what to do',
+    imgUrl:'https:/'+'/i1.sndcdn.com/artworks-000543859353-fvedxx-t500x500.jpg',  
+    artist:' BLACKPINK '
   },
   {
     url: 'Songs/BlackPink-Stay.mp3',
-    name: 'BlackPink - Stay'
+    name: 'BlackPink - Stay',
+    imgUrl:'https:/'+'/i.pinimg.com/736x/45/f5/9d/45f59d3d3881f672b67e7a41f8058273.jpg',  
+    artist:' BLACKPINK '
   },
   {
     url: 'Songs/As If Its Your Last - BlackPink.mp3',
-    name: 'As If Its Your Last'
+    name: 'As If Its Your Last',
+    imgUrl:'https:/'+'/wallpapercave.com/wp/wp4463369.jpg',  
+    artist:' BLACKPINK '
   },
   {
     url: 'Songs/BLACKPINK Pink Venom.mp3',
-    name: 'Pink Venom'
+    name: 'Pink Venom',
+    imgUrl:'https:/'+'/blackpink.cafe/wp-content/uploads/2022/08/blackpink-220825-pink-venom-official-merch-lisa.jpg',  
+    artist:' BLACKPINK '
   },
   {
     url: 'Songs/The Happiest Girl.mp3',
-    name: 'The Happiest Girl'
+    name: 'The Happiest Girl',
+    imgUrl:'https:/'+'/qph.cf2.quoracdn.net/main-qimg-f09ed3ef95e24d44edb1fb76352e9559',  
+    artist:' BLACKPINK '
   },
   {
     url: 'Songs/BlackPink - Forever Young.mp3',
-    name: 'Forever Young'
+    name: 'Forever Young',
+    imgUrl:'https:/'+'/ih1.redbubble.net/image.1328737274.7617/st,small,507x507-pad,600x600,f8f8f8.jpg',  
+    artist:' BLACKPINK '
   },
   {
     url: 'Songs/Tally.mp3',
-    name: 'Blackpink - Tally'
+    name: 'Blackpink - Tally',
+    imgUrl:'https:/'+'/i1.sndcdn.com/artworks-GdlO3nipcLdcaqRI-2UhFUg-t500x500.jpg',  
+    artist:' BLACKPINK '
   },
   {
     url: 'Songs/BLACKPINK Crazy Over You.mp3',
-    name: 'Crazy Over You'
+    name: 'Crazy Over You',
+    imgUrl:'https:/'+'/i1.sndcdn.com/artworks-3sQZWeESgRKR5MqT-Zu0WGQ-t500x500.jpg',  
+    artist:' BLACKPINK '
   },
   {
     url: 'Songs/Tu Pehla Pehla Pyar hai Mera.mp3',
-    name: 'Pehla Pyaar'
+    name: 'Pehla Pyaar',
+    imgUrl:'https:/'+'/i1.sndcdn.com/artworks-000558108219-h0hfs6-t500x500.jpg',  
+    artist:' Armaan Malik '
   },
   {
     url: 'songs/BOL DO NA ZARA.mp3',
-    name: 'Bol-Do-Na-Zara'
+    name: 'Bol-Do-Na-Zara',
+    imgUrl:'https:/'+'/c.saavncdn.com/709/Bol-Do-Na-Zara-Instrumental-Hindi-2018-20181221231527-500x500.jpg',  
+    artist:' Armaan Malik '
   },
   {
     url: 'Songs/Ghar Se Nikalte Hi.mp3',
-    name: 'Ghar Se Nikalte Hi'
+    name: 'Ghar Se Nikalte Hi',
+    imgUrl:'https:/'+'/c.saavncdn.com/098/Ghar-Se-Nikalte-Hi-Hindi-2018-20180407081907-500x500.jpg',  
+    artist:' Armaan Malik '
   },
   {
     url: 'Songs/SAB TERA.mp3',
-    name: 'Sab Tera'
+    name: 'Sab Tera',
+    imgUrl:'https:/'+'/i1.sndcdn.com/artworks-000151944028-4wrwk3-t500x500.jpg',  
+    artist:' Armaan Malik '
   },
   {
     url: 'Songs/WAJAH TUM HO.mp3',
-    name: 'Wajha Tum Ho'
+    name: 'Wajha Tum Ho',
+    imgUrl:'https:/'+'/c.saavncdn.com/590/Wajah-Tum-Ho-Hindi-2016-500x500.jpg',  
+    artist:' Armaan Malik '
   },
   {
     url: 'Songs/Hua Hain Aaj Pehli Baar.mp3',
-    name: 'Hua Hain Aaj Pehli Baar'
+    name: 'Hua Hain Aaj Pehli Baar',
+    imgUrl:'https:/'+'/encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA_5KIFuz7X_XFipxTXBip9QQX1uv1YaFapwq-iyzkHIlv6YXSzmYJHv3tpad62TceXj0&usqp=CAU',  
+    artist:' Armaan Malik '
   },
   {
     url: 'Songs/CHALE AANA.mp3',
-    name: 'Chale Aana'
+    name: 'Chale Aana',
+    imgUrl:'https:/'+'/c.saavncdn.com/082/Chale-Aana-From-De-De-Pyaar-De-Hindi-2019-20190503065702-500x500.jpg',  
+    artist:' Armaan Malik '
   },
   {
     url: 'Songs/Kehta Hai Pal Pal.mp3',
-    name: 'Kehta Hai Pal Pal'
+    name: 'Kehta Hai Pal Pal',
+    imgUrl:'https:/'+'/c.saavncdn.com/706/Kehta-Hai-Pal-Pal-Hindi-2017-500x500.jpg',  
+    artist:' Armaan Malik '
   },
   {
     url: 'Songs/Dil Ibadat.mp3',
-    name: 'Dil Ibadat'
+    name: 'Dil Ibadat',
+    imgUrl:'https:/'+'/c.saavncdn.com/749/Dil-Ibaadat-Lofi-Mix-Hindi-2021-20211118142308-500x500.jpg',  
+    artist:' KK '
   },
   {
     url: 'Songs/Piya Aye Na.mp3',
-    name: 'Piya Aye Na'
+    name: 'Piya Aye Na',
+    imgUrl:'https:/'+'/encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6Qv37IqOB2kTd9MbvmY8LNQrkBBZBLOjMEA&usqp=CAU',  
+    artist:' KK '
   },
   {
     url: 'Songs/Haan Tu Hain.mp3',
-    name: 'Haan Tu Hain'
+    name: 'Haan Tu Hain',
+    imgUrl:'https:/'+'/i.scdn.co/image/ab67616d0000b273cbf9868f67bc58511b48af2a',  
+    artist:' KK '
   },
   {
     url: 'Songs/KHUDA JAANE.mp3',
-    name: 'Khuda Jaane'
+    name: 'Khuda Jaane',
+    imgUrl:'https:/'+'/resources.tidal.com/images/90da7927/e040/4b92/8ea2/1a342c94a449/750x750.jpg',  
+    artist:' KK '
   },
   {
     url: 'Songs/Zara Sa Audio Song.mp3',
-    name: 'Zara Sa'
+    name: 'Zara Sa',
+    imgUrl:'https:/'+'/is1-ssl.mzstatic.com/image/thumb/Music126/v4/17/47/fd/1747fd5c-354b-6dc5-c43c-a0e8fa9b8943/cover.jpg/400x400cc.jpg',  
+    artist:' KK '
   },
   {
     url: 'Songs/Tu Hi Meri Shab Hai.mp3',
-    name: 'Tu Hi Mera Shab Hai'
+    name: 'Tu Hi Mera Shab Hai',
+    imgUrl:'https:/'+'/i0.wp.com/99lyricstore.com/wp-content/uploads/2021/04/Tu2Bhi2Bmeri2Bshab2Bhai2BHindi2BLove2BSong2BLyrics252C2BSung2BBy2BK.K.jpg',  
+    artist:' KK '
   },
   {
     url: 'Songs/Tu Jo Mila Lyrical Song.mp3',
-    name: 'Tu Jo Mila'
+    name: 'Tu Jo Mila',
+    imgUrl:'https:/'+'/c-cl.cdn.smule.com/smule-gg-s-sf-bck2/arr/9c/d4/54d47378-d960-482b-9395-f13ac5e3395d_1024.jpg',  
+    artist:' KK '
   },
   {
     url: 'Songs/TUJHE SOCHTA HOON.mp3',
-    name: 'Tujhe Sochta Hoon'
+    name: 'Tujhe Sochta Hoon',
+    imgUrl:'https:/'+'/c-cl.cdn.smule.com/rs-s78/arr/49/ac/8ab30b9f-0dcf-4d23-a03c-7a6bf9e076a0.jpg',  
+    artist:' KK '
   },
 ];
 let currentSongIndex = 0;
 
-function playSong(songUrl, songName) {
+function playSong(songUrl, songName, artistName, imgUrl) {
   if (currentAudio) {
     currentAudio.pause(); // Pause the previous song
     clearInterval(intervalId); // Clear the interval for updating the current time
@@ -233,10 +345,13 @@ function playSong(songUrl, songName) {
 
   audio.addEventListener('ended', playNextSong);
 
-
   document.getElementById('songName').textContent = songName;
 
+  // Update the artist name using marquee
+  document.getElementById('songArtist').textContent = artistName;
 
+  // Update the song image dynamically
+  document.getElementById('songLogo').src = imgUrl;
 
   audio.addEventListener('loadedmetadata', function () {
     // Get the duration of the audio in seconds
@@ -250,7 +365,7 @@ function playSong(songUrl, songName) {
     document.getElementById('songLength').textContent = `${minutes}:${seconds.toString().padStart(2, '0')}`;
 
     // Display the song name on the webpage
-    document.getElementById('songName').textContent = `Now Playing: ${songName}`;
+    document.getElementById('songName').textContent = songName;
 
     // Reset the progress bar slider
     progressBar.value = 0;
@@ -276,6 +391,7 @@ function playSong(songUrl, songName) {
   // Reset the isFirstLoad flag after the first load
   isFirstLoad = false;
 }
+
 
 function togglePlayPause() {
   if (currentAudio.paused) {
@@ -389,6 +505,10 @@ volumeIcon.addEventListener('click', function () {
     updateVolumeIcon();
   }
 });
+ 
+
+
+
 
 
 
@@ -637,7 +757,7 @@ function playNextSong() {
     currentSongIndex = 0;
   }
   const song = songs[currentSongIndex];
-  playSong(song.url, song.name);
+  playSong(song.url, song.name, song.artist, song.imgUrl); // Pass image URL and artist name to playSong
 }
 
 function playPreviousSong() {
@@ -646,11 +766,36 @@ function playPreviousSong() {
     currentSongIndex = songs.length - 1;
   }
   const song = songs[currentSongIndex];
-  playSong(song.url, song.name);
+  playSong(song.url, song.name, song.artist, song.imgUrl); // Pass image URL and artist name to playSong
 }
-const initialSong = songs[currentSongIndex];
-playSong(initialSong.url, initialSong.name);
 
+const initialSong = songs[currentSongIndex];
+playSong(initialSong.url, initialSong.name, initialSong.artist, initialSong.imgUrl);
+
+
+// Add event listener to the window for keydown event
+window.addEventListener('keydown', function(event) {
+
+  // Prevent default behavior for space bar key
+  if (event.key === " ") {
+    event.preventDefault();
+  }
+  // Check if the pressed key is the left arrow key
+  if (event.key === "ArrowLeft") {
+    // Call the playPreviousSong function
+    playPreviousSong();
+  }
+  // Check if the pressed key is the right arrow key
+  else if (event.key === "ArrowRight") {
+    // Call the playNextSong function
+    playNextSong();
+  }
+  // Check if the pressed key is the space bar
+  else if (event.key === " ") {
+    // Call the togglePlayPause function
+    togglePlayPause();
+  }
+});
 
 // Code for scrolling the cards 
 
