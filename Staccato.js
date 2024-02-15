@@ -775,13 +775,16 @@ playSong(initialSong.url, initialSong.name, initialSong.artist, initialSong.imgU
 
 // Add event listener to the window for keydown event
 window.addEventListener('keydown', function(event) {
-
   // Prevent default behavior for space bar key
   if (event.key === " ") {
-    event.preventDefault();
+    if (document.activeElement !== document.getElementById("searchInput")) {
+      event.preventDefault();
+      // Call the togglePlayPause function
+      togglePlayPause();
+    }
   }
   // Check if the pressed key is the left arrow key
-  if (event.key === "ArrowLeft") {
+  else if (event.key === "ArrowLeft") {
     // Call the playPreviousSong function
     playPreviousSong();
   }
@@ -789,11 +792,6 @@ window.addEventListener('keydown', function(event) {
   else if (event.key === "ArrowRight") {
     // Call the playNextSong function
     playNextSong();
-  }
-  // Check if the pressed key is the space bar
-  else if (event.key === " ") {
-    // Call the togglePlayPause function
-    togglePlayPause();
   }
 });
 
