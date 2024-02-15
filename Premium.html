@@ -1,0 +1,775 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staccato Premium</title>
+    <link rel="icon" href="Logo.png">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/ionicons@5.1.2/dist/ionicons.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500&display=swap" rel="stylesheet"> 
+    <link href="https://unpkg.com/ionicons@4.5.10-0/dist/css/ionicons.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: #121212;
+            color: #fff;
+            
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .hero {
+            position: relative;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+        
+        .hero-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: auto;
+            animation: animateBackground 20s linear infinite;
+        }
+        
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        
+        .container .hero h2 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+        
+        .container .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #1DB954;
+            color: #fff;
+            padding: 15px 30px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1.1rem;
+            transition: background-color 0.3s ease;
+        }
+        
+        .cta-button:hover {
+            background-color: #1ED760;
+        }
+        
+        .premium-plans {
+            padding: 10px 0;
+        }
+        
+        .premium-plans h2 {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        .plans-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        
+        .plan-card {
+            background-color: #212121;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+        }
+        
+        .plan-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0px 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .plan-card h3 {
+            color: #fff;
+            font-weight: bold;
+        }
+        
+        .plan-card p {
+            color: #2b2b2b;
+        }
+        
+        
+        
+        .get-plan-button {
+            display: block;
+            background-color: #1DB954;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-align: center;
+            text-decoration: none;
+            margin-top: 20px;
+        }
+        
+        .get-plan-button:hover {
+            background-color: #1ED760;
+        }
+        
+        .terms {
+            font-size: 12px;
+            color: #666;
+            margin-top: 10px;
+        }
+ 
+
+        .accordion-title {
+            background-color: #f9f9f9;
+            padding: 15px;
+            margin-bottom: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        
+        .accordion-content {
+            display: none;
+            background-color: #fff;
+            padding: 15px;
+            border-radius: 5px;
+        }
+        
+        .accordion-content p {
+            margin-bottom: 10px;
+        }
+        
+        .footer {
+            background-color: #333;
+            color: #fff;
+            padding: 50px 0;
+        }
+        
+        .footer nav ul {
+            list-style-type: none;
+            display: flex;
+            justify-content: space-around;
+        }
+        
+        .footer nav ul li a {
+            text-decoration: none;
+            color: #fff;
+        }
+        
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 10px;
+            }
+        }
+        
+        @keyframes animateBackground {
+            0% {
+                opacity: 1;
+            }
+            50% {
+                opacity: 0.5;
+            }
+            100% {
+                opacity: 1;
+            }
+        }
+        /* Existing styles remain unchanged */
+        html {
+            scroll-behavior: smooth;
+          }
+.hero {
+    position: relative;
+    height: 50vh; /* Reduced height */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* Ensure the image covers the entire container */
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,1) 100%);
+}
+
+.features {
+    background-color: #121212; /* Adjust background color */
+    color: #fff;
+    padding: 80px 0;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.features-table {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+}
+
+.feature {
+    background-color: #1a1a1a; /* Adjust background color */
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.feature p {
+    margin-bottom: 10px;
+}
+
+.status {
+    display: flex;
+    justify-content: space-between;
+}
+.hero {
+    position: relative;
+    height: 50vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 50% 50%; /* Soften bottom corners */
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,1) 100%);
+}
+
+.btn-primary {
+    opacity: 1 !important; /* Adjust button opacity */
+}
+
+.features {
+    background-color: #121212;
+    color: #fff;
+    padding: 80px 0;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    padding: 20px;
+}
+
+.logo img {
+    width: 120px; /* Increase logo size */
+}
+
+.hero {
+    position: relative;
+    height: 50vh;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hero-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 0 0 50% 50%; /* Soften bottom corners */
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,1) 100%);
+}
+
+.container {
+    position: relative; /* Make container relative */
+    z-index: 1; /* Ensure container is above overlay */
+}
+
+.btn-primary {
+    opacity: 1 !important; /* Adjust button opacity */
+}
+
+.features {
+    background-color: #121212;
+    color: #fff;
+    padding: 80px 0;
+}
+
+.features h2 {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.accordion {
+    color: #000; /* Adjust Accordion text color */
+}
+
+.features-table {
+    display: table;
+    width: 90%; /* Decreased width */
+    margin-top: 20px;
+}
+
+.feature {
+    display: table-row;
+}
+
+.feature > div {
+    display: table-cell;
+    padding: 25px;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+.attribute {
+    text-align: left;
+    font-weight: bold;
+}
+
+.free, .premium {
+    width: 35%; /* Decreased width */
+    font-weight: bold;
+}
+
+.free {
+    color: #a5bbd1; /* Change color as needed */
+}
+
+.premium {
+    color: #cff56a; /* Change color as needed */
+}
+
+.feature .free, .feature .premium {
+    width: 15%; /* Decreased width */
+}
+
+*,
+*::before,
+*::after{
+  margin:0;
+  padding: 0;
+  box-sizing: inherit;
+}
+
+/*Section used for centering process*/
+section {
+  width: 100%;
+  height: 85vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.container{
+  width: 100%;
+  max-width: 80rem;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+.accordion-item{
+  background-color: #121212;
+  border-radius: .4rem;
+}
+
+.accordion-item hr{
+  border: 1px solid rgba(255, 255, 255, 0.5);
+}
+
+.accordion-link{
+  font-size: 1.6rem;
+  color: rgba(255,255,255,.8);
+  text-decoration: none;
+  background-color: #121212;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.accordion-link h3{
+  font-weight:500;
+  font-size: 20px;
+}
+
+.accordion-link i{
+  color: #e7d5ff;
+  padding: .5rem;
+  
+}
+
+.accordion-link ul{
+  display:flex;
+  align-items: flex-end;
+  list-style-type: none;
+  margin-left: 25px;
+}
+
+.accordion-link li{
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.4);
+  padding: 0 0 1px 5px;
+}
+
+.accordion-link div{
+  display: flex;
+}
+
+.accordion-link .ion-md-arrow-down{
+  display: none;
+}
+
+.answer{
+  max-height: 0;
+  overflow: hidden;
+  position: relative;
+  background-color:  #121212;
+  transition: max-height 650ms;
+}
+
+
+
+.answer p{
+  color: #fff;
+  font-size: 15px;
+  padding: 2rem;
+  
+}
+
+.accordion-item:target .answer{
+  max-height: 20rem;
+}
+
+.accordion-item:target .accordion-link .ion-md-arrow-forward{
+  display: none
+}
+
+.accordion-item:target .accordion-link .ion-md-arrow-down{
+  display: block;
+}
+.footer {
+    background-color: #333;
+    color: #fff;
+    padding: 40px 0;
+    position: relative;
+  }
+  .footer::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Add overlay */
+    z-index: -1;
+  }
+  .footer ul {
+    list-style: none;
+    padding: 0;
+  }
+  .footer ul li {
+    display: inline-block;
+    margin-right: 20px;
+  }
+  .footer ul li a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 20px;
+  }
+  .footer ul li a:hover {
+    color: #077fff; /* Change hover color */
+  }
+  .social-icons .list-inline-item {
+    font-size: 28px;
+    margin-right: 15px;
+  }
+  .footer-logo {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    max-width: 100px; /* Adjust the size as needed */
+  }
+    </style>
+</head>
+<body>
+    <div class="sidebar">
+        <div class="logo">
+            <a href="index.html">
+                <img src="Staccato.png" alt="Staccato" id="img" />
+            </a>
+        </div>
+    </div>
+    <section class="hero">
+        <div class="overlay"></div>
+        <img src="https://source.unsplash.com/1600x600/?music" alt="Music" class="hero-image">
+        <div class="container">
+            <h2>Unlock Unlimited Music</h2>
+            <p>Listen to your favorite tracks anywhere, anytime with Staccato Premium.</p>
+            <a href="#premium-plans" class="btn btn-primary cta-button">Get Premium</a>
+        </div>
+    </section>
+
+    <section class="premium-plans" id="premium-plans">
+        <div class="container">
+            <h2>Choose Your Plan</h2>
+            <div class="plans-grid">
+                <div class="plan-card" style="background-color: #cff56a;">
+                    <h3>Free Plan</h3>
+                    <p>Activate Now!</p>
+                    <div class="tick">&#10004;</div>
+                    <p class="terms">Terms apply.</p>
+                </div>
+                <div class="plan-card" style="background-color: #ffd2d7;">
+                    <h3>Premium Individual</h3>
+                    <p>₹119 for 2 months</p>
+                    <a href="#" class="get-plan-button">Get Premium Individual</a>
+                    <p class="terms">₹119 for 2 months, then ₹119 per month after. Offer only available if you haven't tried Premium before. Terms apply.</p>
+                </div>
+                <div class="plan-card" style="background-color: #c4b1d4;">
+                    <h3>Premium Student</h3>
+                    <p>₹59 for 2 months</p>
+                    <a href="#" class="get-plan-button">Get Premium Student</a>
+                    <p class="terms">₹59 for 2 months, then ₹59 per month after. Offer available only to students at an accredited higher education institution and if you haven't tried Premium before. Terms apply.</p>
+                </div>
+                <div class="plan-card" style="background-color: #a5bbd1;">
+                    <h3>Premium Family</h3>
+                    <p>₹179 for 2 months</p>
+                    <a href="#" class="get-plan-button">Get Premium Family</a>
+                    <p class="terms">₹179 for 2 months, then ₹179 per month after. Offer only available if you haven't tried Premium before. For up to 6 family members residing at the same address. Terms apply.</p>
+                </div>
+                 
+            </div>
+        </div>
+    </section>
+    
+
+    <section class="features">
+        <div class="container">
+            <h2>What You'll Get ?</h2>
+            <div class="features-table">
+                <div class="feature">
+                    <div class="attribute">Features</div>
+                    <div class="free">Free</div>
+                    <div class="premium">Premium</div>
+                </div>
+                <div class="feature">
+                    <div class="attribute">Ad-free music listening</div>
+                    <div class="free">✔</div>
+                    <div class="premium">✔</div>
+                </div>
+                <div class="feature">
+                    <div class="attribute">Download to listen offline</div>
+                    <div class="free">X</div>
+                    <div class="premium">✔</div>
+                </div>
+                <div class="feature">
+                    <div class="attribute">Play songs in any order</div>
+                    <div class="free">X</div>
+                    <div class="premium">✔</div>
+                </div>
+                <div class="feature">
+                    <div class="attribute">High audio quality</div>
+                    <div class="free">X</div>
+                    <div class="premium">✔</div>
+                </div>
+                <div class="feature">
+                    <div class="attribute">Listen with friends in real time</div>
+                    <div class="free">✔</div>
+                    <div class="premium">✔</div>
+                </div>
+                <div class="feature">
+                    <div class="attribute">Organize listening queue</div>
+                    <div class="free">X</div>
+                    <div class="premium">✔</div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    
+    
+
+
+    <section>
+        <div class="container">
+            <h2>Questions?</h2>
+          <div class="accordion">
+            <div class="accordion-item" id="question1">
+              <a class="accordion-link" href="#question1">
+                <div class="flex">
+                  <h3>How does the Staccato Premium trial work ?</h3>
+                   
+                </div>
+                <i class="icon ion-md-arrow-forward"></i>
+                <i class="icon ion-md-arrow-down"></i>
+              </a>
+              <div class="answer">
+                <p>If you've never had Premium before, you may be eligible for a free (or reduced rate) trial.</p>
+                <p>For trials, you'll still need to enter a valid payment method to sign up. We'll use this to confirm your country or region and take payments if you want to keep Premium after the offer ends.</p>
+                <p>We'll send you a reminder 7 days before your trial ends. Country restrictions and Terms apply.</p>
+              </div>
+              <hr>
+          </div>
+            <div class="accordion-item" id="question2">
+              <a class="accordion-link" href="#question2">
+                <div class="flex">
+                  <h3> How do I cancel my Staccato Premium plan ?</h3>
+                  
+                </div>
+                <i class="icon ion-md-arrow-forward"></i>
+                <i class="icon ion-md-arrow-down"></i>
+              </a>
+              <div class="answer">
+                <p>You can easily cancel your Staccato Premium plan any time online on your account page. Your Premium stays until your next billing date, then your account switches over to our free plan.</p>
+                            <p>You'll keep all your playlists, saved music, and be able to listen with ads when your account is free.</p>
+              </div>
+              <hr>
+          </div>
+            <div class="accordion-item" id="question3">
+              <a class="accordion-link" href="#question3">
+                <div class="flex">
+                  <h3>How does the Staccato Premium Family plan work ?</h3>
+                   
+                </div>
+                <i class="icon ion-md-arrow-forward"></i>
+                <i class="icon ion-md-arrow-down"></i>
+              </a>
+              <div class="answer">
+                <p>Staccato Premium Family is a plan for up to 6 family members who live together. Compared with everyone having their own full-price Staccato Premium Individual account, it's also cheaper. We will ask for your address to ensure you live at the same address. You can invite members to the plan right after the purchase. Each member has their own separate Premium account and can listen at the same time with their own account. All saved music and playlists are their own. Other account holders cannot see what you are listening to.</p>
+                <p><a href="#">Read more info about Staccato Premium Family</a>.</p>
+              </div>
+              <hr>
+          </div>
+            <div class="accordion-item" id="question4">
+              <a class="accordion-link" href="#question4">
+                <div>
+                  <h3> How much is Staccato Premium in India ?</h3>
+                   
+                </div>
+                <i class="icon ion-md-arrow-forward"></i>
+                <i class="icon ion-md-arrow-down"></i>
+              </a>
+              <div class="answer">
+                <p>The Staccato Premium prices in India are different depending on which Premium plan you choose: The Staccato Premium Mini plan costs ₹7 for 1 day, the Premium Individual plan costs ₹119 per month, the Premium Duo plan costs ₹149 per month, the Premium Family plan costs ₹179 per month, the Premium Student plan costs ₹59 per month. If you've never had a Premium plan before, you may be eligible for a free (or reduced rate) trial. Country restrictions and terms apply.</p>
+              </div>
+              <hr>
+          </div>
+         </div>
+        </div>
+      </section>
+    
+    
+      <footer class="footer">
+        <div class="container">
+          <div class="row">
+            <div class="col-md-6">
+              <nav>
+                <ul>
+                  <li><a href="Support.html">Support</a></li>
+                  <li><a href="index.html">Web Player</a></li>
+                  <li><a href="#">Free Mobile App</a></li>
+                </ul>
+              </nav>
+            </div>
+            <div class="col-md-6 text-md-end social-icons">
+              <ul class="list-inline mb-0">
+                <li class="list-inline-item"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fab fa-twitter"></i></a></li>
+                <li class="list-inline-item"><a href="#"><i class="fab fa-instagram"></i></a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </footer>
+    
+
+    <script>
+        const accordionItems = document.querySelectorAll('.accordion-item');
+
+accordionItems.forEach(item => {
+    const title = item.querySelector('.accordion-title');
+    const content = item.querySelector('.accordion-content');
+
+    title.addEventListener('click', () => {
+        content.classList.toggle('active');
+    });
+});
+
+    </script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.3/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+

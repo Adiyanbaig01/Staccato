@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Support - Staccato</title>
+<link rel="icon" href="Logo.png">
+<!-- Font Awesome Icon Library -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+<style>
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+  }
+  html, body {
+    height: 100%;
+  }
+  body {
+    background: linear-gradient(#26002e, black);
+    font-family: 'Montserrat', sans-serif;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+  }
+
+  .container {
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+  }
+
+  h1 {
+    font-size: 2rem;
+  }
+
+  p {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+  }
+
+  .star-rating {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 20px 0;
+  }
+
+  .star-rating .fa-star {
+    cursor: pointer;
+  }
+
+  .star-rating .fa-star.checked {
+    color: orange;
+  }
+
+  .feedback-form {
+    margin-bottom: 20px;
+  }
+
+  .feedback-form label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.2rem;
+  }
+
+  .feedback-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+    resize: none;
+  }
+
+  .feedback-form button {
+    padding: 10px 20px;
+    background-color: #560966; /* Violet color */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.2rem;
+    cursor: pointer;
+  }
+
+  .feedback-success {
+    font-size: 1.2rem;
+    color: #00ff00; /* Green color for success message */
+    display: none;
+  }
+
+  .loaderbg {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 101;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    opacity: 1;
+    transition: opacity 1.5s ease;
+  }
+
+  .loader {
+    width: 150px;
+    height: 150px;
+    border-radius: 100%;
+    background: linear-gradient(transparent 40%, #560966); /* Violet color */
+    animation: animate 1.9s linear infinite;
+  }
+
+  .loader:before {
+    content: '';
+    position: absolute;
+    top: 6px;
+    bottom: 6px;
+    left: 6px;
+    right: 6px;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    border-radius: 100%;
+    z-index: 2;
+  }
+
+  @keyframes animate {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Home button styles */
+  .home-button {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    z-index: 102; /* Higher than loader */
+    font-size: 1.5rem;
+    color: white;
+    text-decoration: none;
+  }
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 9999;
+    padding: 20px;
+}
+.logo img {
+    width: 120px; /* Increase logo size */
+}
+button {
+  background-color: #560966;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Smooth transition for color change */
+}
+button:hover {
+  background-color: #6d0c80; /* Change color on hover */
+}
+
+</style>
+</head>
+<body>
+
+  <div class="sidebar">
+    <div class="logo">
+        <a href="index.html">
+            <img src="Staccato.png" alt="Staccato" id="img" />
+        </a>
+    </div>
+</div>
+ 
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+    var loaderContainer = document.getElementById("loaderContainer");
+    loaderContainer.style.opacity = 0;
+    setTimeout(function() {
+      loaderContainer.style.display = "none";
+    }, 1500); // Adjust the duration as needed
+  });
+</script>
+
+<div class="container">
+  <h1>Support</h1>
+  <p>Welcome to the support page of Staccato. Here you can find useful information and leave feedback.</p>
+  <p>If you have any questions or need assistance, please feel free to reach out to us.</p>
+  <p>Developer: Adiyan Baig</p>
+</div>
+
+<div class="container">
+  <h2>Feedback</h2>
+  <div class="star-rating">
+    <span class="fa fa-star" onclick="rateStar(1)"></span>
+    <span class="fa fa-star" onclick="rateStar(2)"></span>
+    <span class="fa fa-star" onclick="rateStar(3)"></span>
+    <span class="fa fa-star" onclick="rateStar(4)"></span>
+    <span class="fa fa-star" onclick="rateStar(5)"></span>
+  </div>
+
+  <form class="feedback-form" id="feedbackForm">
+    <label for="feedback">Your Feedback:</label>
+    <textarea id="feedback" name="feedback" rows="4" placeholder="Please enter your feedback here"></textarea>
+    <button type="button" onclick="submitFeedback()">Submit Feedback</button>
+  </form>
+  <p class="feedback-success" id="feedbackSuccess">Thanks for sharing your feedback with us!</p>
+</div>
+
+<script>
+  function rateStar(starCount) {
+    var stars = document.querySelectorAll('.fa-star');
+    stars.forEach(function(star, index) {
+      star.classList.remove('checked');
+      if (index < starCount) {
+        star.classList.add('checked');
+      }
+    });
+  }
+
+  function submitFeedback() {
+    var successMessage = document.getElementById('feedbackSuccess');
+    successMessage.style.display = 'block';
+    document.getElementById('feedbackForm').reset();
+    return false; // Prevent form submission and page reload
+  }
+</script>
+
+</body>
+</html>
