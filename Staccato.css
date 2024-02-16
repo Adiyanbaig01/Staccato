@@ -91,7 +91,7 @@ body {
   left: 0;
   top: 0;
   bottom: 0;
-  width: 196px;
+  width: 180px;
   background-color: #000000;
   background-image: radial-gradient(circle, #41074d 0%, #000000 100%);
   padding: 24px;
@@ -155,7 +155,7 @@ body {
 }
 
 .main-container {
-  margin-left: 245px;
+  margin-left: 227px;
   margin-bottom: 100px;
 }
 
