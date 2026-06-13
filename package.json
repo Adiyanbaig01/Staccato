@@ -1,0 +1,24 @@
+{
+  "name": "staccato",
+  "version": "1.0.0",
+  "description": "A dynamic music streaming web app powered by YouTube audio through yt-dlp.",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "keywords": [
+    "music",
+    "streaming",
+    "youtube",
+    "yt-dlp"
+  ],
+  "author": "Staccato",
+  "license": "MIT",
+  "dependencies": {
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.7",
+    "express": "^4.21.2",
+    "express-rate-limit": "^7.5.0"
+  }
+}
