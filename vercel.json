@@ -1,6 +1,48 @@
 {
   "version": 2,
-  "cleanUrls": true,
+  "routes": [
+    {
+      "src": "/Staccato.css",
+      "dest": "/Staccato.css",
+      "headers": {
+        "Content-Type": "text/css; charset=utf-8"
+      }
+    },
+    {
+      "src": "/Staccato.js",
+      "dest": "/Staccato.js",
+      "headers": {
+        "Content-Type": "application/javascript; charset=utf-8"
+      }
+    },
+    {
+      "src": "/config.js",
+      "dest": "/config.js",
+      "headers": {
+        "Content-Type": "application/javascript; charset=utf-8"
+      }
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/assets/$1"
+    },
+    {
+      "src": "/Images/(.*)",
+      "dest": "/Images/$1"
+    },
+    {
+      "src": "/Songs/(.*)",
+      "dest": "/Songs/$1"
+    },
+    {
+      "src": "/(.*\\.(png|jpg|jpeg|gif|svg|ico|webp|mp3|html))",
+      "dest": "/$1"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/(.*)",
