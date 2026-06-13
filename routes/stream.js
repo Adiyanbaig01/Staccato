@@ -14,7 +14,7 @@ router.get("/:videoId", (req, res, next) => {
   const { videoId } = req.params;
 
   if (!VIDEO_ID_PATTERN.test(videoId)) {
-    return res.status(400).json({ error: "Invalid YouTube video ID." });
+    return res.status(400).json({ error: "Invalid video ID." });
   }
 
   const url = `https://www.youtube.com/watch?v=${videoId}`;

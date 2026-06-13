@@ -42,7 +42,7 @@ function normalizeVideo(video) {
   return {
     id: video.id,
     title: video.title || "Untitled track",
-    artist: video.uploader || video.channel || video.creator || "YouTube",
+    artist: video.uploader || video.channel || video.creator || "Unknown artist",
     duration: formatDuration(video.duration),
     thumbnail: pickThumbnail(video)
   };
@@ -65,7 +65,7 @@ router.get("/", (req, res, next) => {
 
   exec(command, { maxBuffer: 1024 * 1024 * 10 }, (error, stdout, stderr) => {
     if (error) {
-      error.publicMessage = "Unable to search YouTube right now.";
+      error.publicMessage = "Unable to search right now.";
       error.details = stderr;
       return next(error);
     }
@@ -80,7 +80,7 @@ router.get("/", (req, res, next) => {
 
       return res.json(results);
     } catch (parseError) {
-      parseError.publicMessage = "Could not parse YouTube search results.";
+      parseError.publicMessage = "Could not parse search results.";
       return next(parseError);
     }
   });

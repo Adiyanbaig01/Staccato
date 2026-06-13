@@ -4,7 +4,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Staccato is a dynamic music streaming web app powered by YouTube audio.">
+  <meta name="description" content="Staccato is a dynamic music streaming web app.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,77 +14,49 @@
 </head>
 
 <body>
-  <div class="app-shell">
-    <nav class="top-nav">
-      <a href="#" class="brand" aria-label="Staccato home">
-        <img src="Logo.png" alt="" class="brand-mark">
-        <span>Staccato</span>
-      </a>
+  <aside class="sidebar">
+    <a href="#" class="brand" aria-label="Staccato home">
+      <img src="Logo.png" alt="" class="brand-mark">
+      <span>Staccato</span>
+    </a>
 
+    <nav class="side-nav" aria-label="Primary navigation">
+      <a href="#" class="side-nav-item active">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="m3 10 9-7 9 7v10a1 1 0 0 1-1 1h-5v-7H9v7H4a1 1 0 0 1-1-1V10Z" />
+        </svg>
+        Home
+      </a>
+      <a href="#searchInput" class="side-nav-item">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
+        </svg>
+        Search
+      </a>
+      <a href="#homeFeed" class="side-nav-item">
+        <svg aria-hidden="true" viewBox="0 0 24 24">
+          <path d="M5 4h14v16H5zM9 8h6M9 12h6M9 16h4" />
+        </svg>
+        Library
+      </a>
+    </nav>
+  </aside>
+
+  <main class="main-content">
+    <div class="search-zone">
       <div class="search-wrap">
-        <form class="search-form" id="searchForm" role="search">
+        <div class="search-form" role="search">
           <svg aria-hidden="true" viewBox="0 0 24 24">
             <path d="m21 21-4.35-4.35m1.35-5.65a7 7 0 1 1-14 0 7 7 0 0 1 14 0Z" />
           </svg>
-          <input id="searchInput" type="search" autocomplete="off" placeholder="Search any song on YouTube">
-          <button type="submit">Search</button>
-        </form>
+          <input id="searchInput" type="search" autocomplete="off" placeholder="What do you want to play?">
+        </div>
         <div class="search-panel" id="searchPanel" aria-live="polite"></div>
       </div>
+    </div>
 
-      <div class="nav-links">
-        <a href="#discover">Discover</a>
-        <a href="#trending">Trending</a>
-        <a href="#player">Player</a>
-      </div>
-    </nav>
-
-    <main>
-      <section class="hero-section" id="discover">
-        <div class="hero-copy">
-          <p class="eyebrow">YouTube-powered streaming</p>
-          <h1>Find the track in your head and play it instantly.</h1>
-          <p class="hero-text">Staccato now searches YouTube dynamically, pulls the best available audio stream with yt-dlp, and keeps your session light with no database.</p>
-          <div class="hero-actions">
-            <button class="primary-action" id="focusSearchButton">Start searching</button>
-            <button class="ghost-action" data-query="Arijit Singh best songs">Play a mood</button>
-          </div>
-        </div>
-
-        <div class="now-card" id="heroNowCard">
-          <img src="Images/song20.jpg" alt="" class="now-art">
-          <div>
-            <p>Ready when you are</p>
-            <h2>Staccato Radio</h2>
-            <span>Search, select, stream.</span>
-          </div>
-        </div>
-      </section>
-
-      <section class="content-section" id="trending">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Fresh picks</p>
-            <h2>Popular on Staccato</h2>
-          </div>
-          <button class="text-action" data-query="latest hindi romantic songs">Refresh vibe</button>
-        </div>
-        <div class="song-grid" id="featuredGrid"></div>
-      </section>
-
-      <section class="content-section">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">Artist lanes</p>
-            <h2>Jump back in</h2>
-          </div>
-        </div>
-        <div class="artist-strip" id="artistStrip"></div>
-      </section>
-    </main>
-  </div>
-
-  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+    <div class="home-feed" id="homeFeed"></div>
+  </main>
 
   <footer class="player-bar" id="player">
     <div class="track-meta">
@@ -104,6 +76,7 @@
         </button>
         <button class="play-button" id="playPauseButton" aria-label="Play">
           <span id="playPauseIcon">&gt;</span>
+          <span class="button-spinner" aria-hidden="true"></span>
         </button>
         <button class="icon-button" id="nextButton" aria-label="Next track">
           <svg aria-hidden="true" viewBox="0 0 24 24">
@@ -120,10 +93,6 @@
     </div>
 
     <div class="player-side">
-      <div class="loading-pill" id="loadingPill">
-        <span class="spinner"></span>
-        Loading
-      </div>
       <input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.9" aria-label="Volume">
     </div>
   </footer>
