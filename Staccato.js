@@ -3,6 +3,20 @@ let intervalId = null; // Stores the interval ID for updating the current time
 let progressBar = document.getElementById('progressBar');
 let mouseDownOnSlider = false;
 let isFirstLoad = true; // Flag to check if it is the first time the page loads
+const API_BASE = window.STACCATO_API_BASE || (window.location.protocol === "file:" ? "http://localhost:3000" : "");
+let searchTimeoutId = null;
+let searchAbortController = null;
+let dynamicSearchResults = [];
+
+function escapeHtml(value) {
+  return String(value || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;")
+    .replace(/'/g, "&#039;");
+}
+
 let songs = [
   {
     url: '',
@@ -847,17 +861,80 @@ lists.forEach(makeListScrollable);
 
 // Code for searching Songs 
 
-function filterPlaylists() {
-  var input, filter, playlists, item, title, i, txtValue;
-  input = document.getElementById("searchInput");
-  filter = input.value.toUpperCase();
+function getSearchResultsContainer() {
+  let resultsContainer = document.getElementById("dynamicSearchResults");
+
+  if (!resultsContainer) {
+    resultsContainer = document.createElement("div");
+    resultsContainer.id = "dynamicSearchResults";
+    resultsContainer.className = "dynamic-search-results";
+
+    const searchContainer = document.getElementById("searchContainer");
+    searchContainer.appendChild(resultsContainer);
+
+    resultsContainer.addEventListener("mousedown", function (event) {
+      event.preventDefault();
+    });
+
+    resultsContainer.addEventListener("click", function (event) {
+      const resultButton = event.target.closest("[data-dynamic-index]");
+      if (!resultButton) return;
+
+      const index = Number(resultButton.dataset.dynamicIndex);
+      const track = dynamicSearchResults[index];
+      if (track) {
+        playDynamicTrack(track);
+      }
+    });
+  }
+
+  return resultsContainer;
+}
+
+function renderDynamicSearchResults(results, message) {
+  const resultsContainer = getSearchResultsContainer();
+
+  if (message) {
+    resultsContainer.innerHTML = `<div class="dynamic-search-message">${message}</div>`;
+    resultsContainer.style.display = "block";
+    return;
+  }
+
+  if (!results.length) {
+    resultsContainer.innerHTML = `<div class="dynamic-search-message">No songs found</div>`;
+    resultsContainer.style.display = "block";
+    return;
+  }
+
+  resultsContainer.innerHTML = results.map((track, index) => `
+    <button type="button" class="dynamic-search-result" data-dynamic-index="${index}">
+      <img src="${escapeHtml(track.thumbnail || 'Images/null.png')}" alt="">
+      <span>
+        <strong>${escapeHtml(track.title || 'Untitled track')}</strong>
+        <small>${escapeHtml(track.artist || 'Unknown artist')} ${track.duration ? '&bull; ' + escapeHtml(track.duration) : ''}</small>
+      </span>
+    </button>
+  `).join("");
+
+  resultsContainer.style.display = "block";
+}
+
+function hideDynamicSearchResults() {
+  const resultsContainer = document.getElementById("dynamicSearchResults");
+  if (resultsContainer) {
+    resultsContainer.style.display = "none";
+  }
+}
+
+function filterLocalPlaylists(query) {
+  var filter, playlists, item, title, txtValue;
+  filter = query.toUpperCase();
   playlists = document.querySelectorAll(".item");
 
   playlists.forEach(function (item) {
     title = item.querySelector("h4");
     txtValue = title.textContent || title.innerText;
 
-    // Check if the playlist title contains the filter text
     if (txtValue.toUpperCase().indexOf(filter) > -1) {
       item.style.display = "";
     } else {
@@ -865,7 +942,6 @@ function filterPlaylists() {
     }
   });
 
-  // Hide or show the playlist headings based on the search filter
   var headings = document.querySelectorAll(".spotify-playlists h2");
   headings.forEach(function (heading) {
     var playlistItems = heading.nextElementSibling.querySelectorAll(".item");
@@ -879,6 +955,95 @@ function filterPlaylists() {
       heading.style.display = "none";
     }
   });
+}
+
+async function searchDynamicSongs(query) {
+  if (searchAbortController) {
+    searchAbortController.abort();
+  }
+
+  searchAbortController = new AbortController();
+  renderDynamicSearchResults([], "Searching...");
+
+  try {
+    const response = await fetch(`${API_BASE}/api/search?q=${encodeURIComponent(query)}`, {
+      signal: searchAbortController.signal
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Could not search songs");
+    }
+
+    dynamicSearchResults = data;
+    renderDynamicSearchResults(dynamicSearchResults);
+  } catch (error) {
+    if (error.name === "AbortError") {
+      return;
+    }
+
+    console.error(error);
+    renderDynamicSearchResults([], "Could not search songs");
+  }
+}
+
+async function playDynamicTrack(track) {
+  const songNameElement = document.getElementById('songName');
+  const songArtistElement = document.getElementById('songArtist');
+  const songLogoElement = document.getElementById('songLogo');
+
+  songNameElement.textContent = "Loading...";
+  songArtistElement.textContent = track.artist || "Preparing song";
+  songLogoElement.src = track.thumbnail || "Images/null.png";
+
+  try {
+    const response = await fetch(`${API_BASE}/api/stream/${encodeURIComponent(track.id)}`);
+    const data = await response.json();
+
+    if (!response.ok || !data.streamUrl) {
+      throw new Error(data.error || "Could not load stream");
+    }
+
+    const existingDynamicIndex = songs.findIndex(song => song.url === data.streamUrl);
+    if (existingDynamicIndex === -1) {
+      songs.push({
+        url: data.streamUrl,
+        name: track.title,
+        artist: track.artist || "Unknown artist",
+        imgUrl: track.thumbnail || "Images/null.png"
+      });
+      currentSongIndex = songs.length - 1;
+    } else {
+      currentSongIndex = existingDynamicIndex;
+    }
+
+    isFirstLoad = false;
+    playSong(data.streamUrl, track.title, track.artist || "Unknown artist", track.thumbnail || "Images/null.png");
+    hideDynamicSearchResults();
+  } catch (error) {
+    console.error(error);
+    alert("Could not load track");
+    songNameElement.textContent = "No Track Playing";
+    songArtistElement.textContent = "Pick Your Song";
+  }
+}
+
+function filterPlaylists() {
+  const input = document.getElementById("searchInput");
+  const query = input.value.trim();
+
+  window.clearTimeout(searchTimeoutId);
+  filterLocalPlaylists(query);
+
+  if (query.length < 2) {
+    dynamicSearchResults = [];
+    hideDynamicSearchResults();
+    return;
+  }
+
+  searchTimeoutId = window.setTimeout(function () {
+    searchDynamicSongs(query);
+  }, 500);
 }
 
 
@@ -899,7 +1064,10 @@ function toggleSearch() {
 }
 function hideSearchInput() {
   var searchInput = document.getElementById("searchInput");
-  searchInput.style.display = "none";
+  setTimeout(function () {
+    searchInput.style.display = "none";
+    hideDynamicSearchResults();
+  }, 180);
 }
 
 
