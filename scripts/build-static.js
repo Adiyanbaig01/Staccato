@@ -6,8 +6,8 @@ const dist = path.join(root, "dist");
 
 const entries = [
   "index.html",
-  "Staccato.css",
-  "Staccato.js",
+  "staccato.css",
+  "staccato.js",
   "config.js",
   "Logo.png",
   "Staccato.png",
