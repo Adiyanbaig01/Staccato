@@ -74,7 +74,6 @@ button {
 .side-nav-item {
   display: flex;
   align-items: center;
-  gap: 14px;
   min-height: 44px;
   padding: 0 12px;
   border-radius: 8px;
@@ -89,18 +88,6 @@ button {
 .side-nav-item.active {
   background: var(--surface);
   color: var(--text);
-}
-
-.side-nav-item svg,
-.search-form svg,
-.icon-button svg {
-  width: 22px;
-  height: 22px;
-  fill: none;
-  stroke: currentColor;
-  stroke-linecap: round;
-  stroke-linejoin: round;
-  stroke-width: 2;
 }
 
 .main-content {
@@ -128,8 +115,7 @@ button {
 
 .search-form {
   display: grid;
-  grid-template-columns: 22px 1fr;
-  gap: 12px;
+  grid-template-columns: 1fr;
   align-items: center;
   min-height: 48px;
   padding: 0 16px;
