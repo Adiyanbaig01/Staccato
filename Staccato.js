@@ -725,49 +725,11 @@ function windowResized() {
 
 
 
-// This is for the footer Names 
-const creators = [
-  "Adiyan Baig",
-  "Saniya Sayyad",
-  "Sharvari Dekre",
-  "Nikhil Pahanpate",
-  "Yash Giradkar",
-  "Saheba Sayyad"
-];
-
+// Footer names are static so the footer stays calm and readable.
 const creatorsElement = document.getElementById("creators");
-const cursorElement = document.querySelector(".cursor");
-let currentIndex = 0;
-let currentText = "";
-let isDeleting = false;
-let typingSpeed = 50; // Speed in milliseconds
-let deletionSpeed = 20; // Speed of deleting characters
-
-function type() {
-  const currentCreator = creators[currentIndex];
-  if (isDeleting) {
-    currentText = currentCreator.substring(0, currentText.length - 1);
-    typingSpeed = deletionSpeed; // Set deletion speed
-  } else {
-    currentText = currentCreator.substring(0, currentText.length + 1);
-    typingSpeed = 50; // Set typing speed
-  }
-
-  creatorsElement.textContent = currentText;
-
-  if (!isDeleting && currentText === currentCreator) {
-    isDeleting = true;
-    typingSpeed = 1000; // Pause at the end
-  } else if (isDeleting && currentText === "") {
-    isDeleting = false;
-    currentIndex = (currentIndex + 1) % creators.length;
-    typingSpeed = 50; // Typing speed after deletion
-  }
-
-  setTimeout(type, typingSpeed);
+if (creatorsElement) {
+  creatorsElement.textContent = "Sharvari Dhekre & Adiyan Baig";
 }
-// Initial typing start
-setTimeout(type, 1000);
 
 
 
@@ -938,37 +900,6 @@ function hideDynamicSearchResults() {
   if (resultsContainer) {
     resultsContainer.style.display = "none";
   }
-}
-
-function filterLocalPlaylists(query) {
-  var filter, playlists, item, title, txtValue;
-  filter = query.toUpperCase();
-  playlists = document.querySelectorAll(".item");
-
-  playlists.forEach(function (item) {
-    title = item.querySelector("h4");
-    txtValue = title.textContent || title.innerText;
-
-    if (txtValue.toUpperCase().indexOf(filter) > -1) {
-      item.style.display = "";
-    } else {
-      item.style.display = "none";
-    }
-  });
-
-  var headings = document.querySelectorAll(".spotify-playlists h2");
-  headings.forEach(function (heading) {
-    var playlistItems = heading.nextElementSibling.querySelectorAll(".item");
-    var visiblePlaylists = Array.from(playlistItems).filter(
-      (item) => item.style.display !== "none"
-    );
-
-    if (visiblePlaylists.length > 0) {
-      heading.style.display = "";
-    } else {
-      heading.style.display = "none";
-    }
-  });
 }
 
 async function searchDynamicSongs(query) {
@@ -1144,7 +1075,6 @@ function filterPlaylists() {
   const query = input.value.trim();
 
   window.clearTimeout(searchTimeoutId);
-  filterLocalPlaylists(query);
 
   if (query.length < 2) {
     dynamicSearchResults = [];
@@ -1154,7 +1084,7 @@ function filterPlaylists() {
 
   searchTimeoutId = window.setTimeout(function () {
     searchDynamicSongs(query);
-  }, 500);
+  }, 300);
 }
 
 
