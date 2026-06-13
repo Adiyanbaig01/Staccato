@@ -41,8 +41,6 @@
             <span class="fa fa-search"></span>
             <span>Search</span>
           </a>
-          <input type="text" id="searchInput" placeholder="Search..." oninput="filterPlaylists()" style="display: none;"
-            onblur="hideSearchInput()">
         </li>
 
         <li>
@@ -104,6 +102,12 @@
         <button type="button" class="fa fas fa-chevron-left"></button>
         <button type="button" class="fa fas fa-chevron-right"></button>
       </div>
+      <div class="topbar-search-island" id="topSearchContainer">
+        <span class="fa fa-search"></span>
+        <input type="text" id="searchInput" placeholder="Search any song..." oninput="filterPlaylists()"
+          onfocus="showDynamicSearchResults()" autocomplete="off">
+        <button type="button" id="topSearchButton" onclick="submitTopSearch()">Search</button>
+      </div>
       <div class="navbar">
         <ul>
           <li>
@@ -118,6 +122,13 @@
           </li>
         </ul>
         <button type="button">Log In</button>
+      </div>
+    </div>
+
+    <div class="spotify-playlists recommendations-section" id="recommendationsSection">
+      <h2>Recommended For You</h2>
+      <div class="list" id="recommendationsList">
+        <div class="recommendation-empty">Start a song to get recommendations.</div>
       </div>
     </div>
 

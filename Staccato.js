@@ -7,6 +7,8 @@ const API_BASE = window.STACCATO_API_BASE || (window.location.protocol === "file
 let searchTimeoutId = null;
 let searchAbortController = null;
 let dynamicSearchResults = [];
+let recommendationTracks = [];
+let recommendationAbortController = null;
 
 function escapeHtml(value) {
   return String(value || "")
@@ -404,6 +406,10 @@ function playSong(songUrl, songName, artistName, imgUrl) {
 
   // Reset the isFirstLoad flag after the first load
   isFirstLoad = false;
+
+  if (songUrl && songName && songName !== "No Track Playing") {
+    updateRecommendations(songName, artistName);
+  }
 }
 
 
@@ -869,7 +875,7 @@ function getSearchResultsContainer() {
     resultsContainer.id = "dynamicSearchResults";
     resultsContainer.className = "dynamic-search-results";
 
-    const searchContainer = document.getElementById("searchContainer");
+    const searchContainer = document.getElementById("topSearchContainer") || document.getElementById("searchContainer");
     searchContainer.appendChild(resultsContainer);
 
     resultsContainer.addEventListener("mousedown", function (event) {
@@ -889,6 +895,14 @@ function getSearchResultsContainer() {
   }
 
   return resultsContainer;
+}
+
+function showDynamicSearchResults() {
+  const query = document.getElementById("searchInput").value.trim();
+
+  if (dynamicSearchResults.length > 0 || query.length > 1) {
+    getSearchResultsContainer().style.display = "block";
+  }
 }
 
 function renderDynamicSearchResults(results, message) {
@@ -1028,6 +1042,103 @@ async function playDynamicTrack(track) {
   }
 }
 
+function renderRecommendations(results, message) {
+  const list = document.getElementById("recommendationsList");
+  if (!list) return;
+
+  if (message) {
+    list.innerHTML = `<div class="recommendation-empty">${message}</div>`;
+    return;
+  }
+
+  recommendationTracks = results || [];
+
+  if (!recommendationTracks.length) {
+    list.innerHTML = `<div class="recommendation-empty">Play a song to tune recommendations.</div>`;
+    return;
+  }
+
+  list.innerHTML = recommendationTracks.map((track, index) => `
+    <div class="item recommendation-item" data-recommendation-index="${index}">
+      <img src="${escapeHtml(track.thumbnail || 'Images/null.png')}" />
+      <div class="play">
+        <span class="fa fa-play"></span>
+      </div>
+      <h4>${escapeHtml(track.title || 'Untitled track')}</h4>
+      <p>${escapeHtml(track.artist || 'Unknown artist')}</p>
+    </div>
+  `).join("");
+}
+
+function buildRecommendationQuery(songName, artistName) {
+  const cleanSong = String(songName || "").replace(/\s+/g, " ").trim();
+  const cleanArtist = String(artistName || "").replace(/\s+/g, " ").trim();
+
+  if (cleanArtist && cleanArtist !== "Pick Your Song" && cleanArtist !== "Unknown artist") {
+    return `${cleanArtist} ${cleanSong} similar songs`;
+  }
+
+  if (cleanSong) {
+    return `${cleanSong} similar songs`;
+  }
+
+  const seeds = [
+    "trending hindi songs",
+    "top english hits",
+    "lofi chill beats",
+    "bollywood romantic songs",
+    "pop songs 2026"
+  ];
+
+  return seeds[Math.floor(Math.random() * seeds.length)];
+}
+
+async function updateRecommendations(songName, artistName) {
+  const list = document.getElementById("recommendationsList");
+  if (!list) return;
+
+  if (recommendationAbortController) {
+    recommendationAbortController.abort();
+  }
+
+  recommendationAbortController = new AbortController();
+  renderRecommendations([], "Finding songs you might like...");
+
+  try {
+    const query = buildRecommendationQuery(songName, artistName);
+    const response = await fetch(`${API_BASE}/api/search?q=${encodeURIComponent(query)}`, {
+      signal: recommendationAbortController.signal
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Could not load recommendations");
+    }
+
+    renderRecommendations(data.filter(track => track && track.id));
+  } catch (error) {
+    if (error.name === "AbortError") {
+      return;
+    }
+
+    console.error(error);
+    renderRecommendations([], "Recommendations will appear when search is ready.");
+  }
+}
+
+function submitTopSearch() {
+  const input = document.getElementById("searchInput");
+  const query = input.value.trim();
+
+  if (!query) {
+    input.focus();
+    return;
+  }
+
+  window.clearTimeout(searchTimeoutId);
+  searchDynamicSongs(query);
+}
+
 function filterPlaylists() {
   const input = document.getElementById("searchInput");
   const query = input.value.trim();
@@ -1050,22 +1161,11 @@ function filterPlaylists() {
 
 function toggleSearch() {
   var searchInput = document.getElementById("searchInput");
-  var searchContainer = document.getElementById("searchContainer");
-
-  // Toggle the display of the search input
-  searchInput.style.display = (searchInput.style.display === "none" || searchInput.style.display === "") ? "block" : "none";
-
-  // If the search input is displayed, focus on it; otherwise, hide it
-  if (searchInput.style.display === "block") {
-    searchInput.focus();
-  } else {
-    searchContainer.blur();
-  }
+  searchInput.focus();
+  showDynamicSearchResults();
 }
 function hideSearchInput() {
-  var searchInput = document.getElementById("searchInput");
   setTimeout(function () {
-    searchInput.style.display = "none";
     hideDynamicSearchResults();
   }, 180);
 }
@@ -1103,4 +1203,38 @@ document.addEventListener('DOMContentLoaded', function () {
   loaderBg.addEventListener('transitionend', function () {
     loaderBg.style.display = 'none';
   });
+});
+
+document.addEventListener('DOMContentLoaded', function () {
+  const recommendationsList = document.getElementById("recommendationsList");
+  const searchInput = document.getElementById("searchInput");
+
+  if (recommendationsList) {
+    recommendationsList.addEventListener("click", function (event) {
+      const item = event.target.closest("[data-recommendation-index]");
+      if (!item) return;
+
+      const track = recommendationTracks[Number(item.dataset.recommendationIndex)];
+      if (track) {
+        playDynamicTrack(track);
+      }
+    });
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener("keydown", function (event) {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        submitTopSearch();
+      }
+    });
+  }
+
+  document.addEventListener("click", function (event) {
+    if (!event.target.closest("#topSearchContainer")) {
+      hideDynamicSearchResults();
+    }
+  });
+
+  updateRecommendations();
 });
