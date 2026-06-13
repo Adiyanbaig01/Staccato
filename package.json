@@ -4,6 +4,7 @@
   "description": "A dynamic music streaming web app powered by YouTube audio through yt-dlp.",
   "main": "server.js",
   "scripts": {
+    "build": "node scripts/build-static.js",
     "start": "node server.js",
     "dev": "node server.js"
   },
