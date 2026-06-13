@@ -4,86 +4,947 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Staccato is a dynamic music streaming web app.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="icon" href="Logo.png">
   <link rel="stylesheet" href="Staccato.css">
-  <title>Staccato</title>
+  <link rel="icon" href="Logo.png">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <title>Staccato - Let's Listen Something Like Never Before </title>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+
 </head>
 
 <body>
-  <aside class="sidebar">
-    <a href="#" class="brand" aria-label="Staccato home">
-      <img src="Logo.png" alt="" class="brand-mark">
-      <span>Staccato</span>
-    </a>
 
-    <nav class="side-nav" aria-label="Primary navigation">
-      <a href="#" class="side-nav-item active">
-        Home
+   <div class="loaderbg" id="loaderContainer">
+    <div class="loader" id="loadingElement"></div>
+  </div>
+  
+  <div class="sidebar">sss
+    <div class="logo">
+      <a href="#">
+        <img src="Staccato.png" alt="Staccato" id="img" />
       </a>
-      <a href="#searchInput" class="side-nav-item">
-        Search
-      </a>
-      <a href="#homeFeed" class="side-nav-item">
-        Library
-      </a>
-    </nav>
-  </aside>
+    </div>
 
-  <main class="main-content">
-    <div class="search-zone">
-      <div class="search-wrap">
-        <div class="search-form" role="search">
-          <input id="searchInput" type="search" autocomplete="off" placeholder="What do you want to play?">
+    <div class="navigation">
+      <ul>
+        <li>
+          <a href="#" onclick="scrollToTop()">
+            <span class="fa fa-home"></span>
+            <span>Home</span>
+          </a>
+        </li>
+
+        <li id="searchContainer">
+          <a href="#" id="searchLink" onclick="toggleSearch()">
+            <span class="fa fa-search"></span>
+            <span>Search</span>
+          </a>
+          <input type="text" id="searchInput" placeholder="Search..." oninput="filterPlaylists()" style="display: none;"
+            onblur="hideSearchInput()">
+        </li>
+
+        <li>
+          <a href="#">
+            <span class="fa fas fa-book"></span>
+            <span>Your Library</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+
+    <div class="navigation">
+      <ul>
+        <li>
+          <a href="#">
+            <span class="fa fas fa-plus-square"></span>
+            <span>Create Playlist</span>
+          </a>
+        </li>
+
+        <li>
+          <a href="#">
+            <span class="fa fas fa-heart"></span>
+            <span>Liked Songs</span>
+          </a>
+        </li>
+        <li>
+          <h4 style="color: #CACACA ; font-family: Arial, Helvetica, sans-serif;"> Rain Effect </h4>
+          <br>
+          <label class="toggle-button">
+            <input type="checkbox" id="rainToggle">
+            <span class="slider round"></span>
+          </label>
+
+        </li>
+
+      </ul>
+    </div>
+
+
+
+    <div class="policies">
+      <ul>
+        <li>
+          <a href="#">Cookies</a>
+        </li>
+        <li>
+          <a href="#">Privacy</a>
+        </li>
+
+      </ul>
+    </div>
+  </div>
+
+  <div class="main-container">
+    <div class="topbar">
+
+      <div class="prev-next-buttons">
+        <button type="button" class="fa fas fa-chevron-left"></button>
+        <button type="button" class="fa fas fa-chevron-right"></button>
+      </div>
+      <div class="navbar">
+        <ul>
+          <li>
+            <a href="Premium.html">Premium</a>
+          </li>
+          <li>
+            <a href="Support.html">Support</a>
+          </li>
+          <li class="divider">|</li>
+          <li>
+            <a href="#">Sign Up</a>
+          </li>
+        </ul>
+        <button type="button">Log In</button>
+      </div>
+    </div>
+
+    <div class="spotify-playlists">
+      <h2>Staccato Playlists</h2>
+      <div class="list">
+
+        <div class="item">
+          <img src="https://i.scdn.co/image/ab67616d0000b273141cf717cd3993690358a60c" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/Dancing With Your Ghost.mp3', 'Dancing With Your Ghost', 'Sasha Alex Sloan', 'https:/'+'/i.scdn.co/image/ab67616d0000b273141cf717cd3993690358a60c');"></span>
+          </div>
+          <h4>Dancing With Your Ghost</h4>
+          <p>'I stay up all night
+            Tell myself I'm alright
+            Baby, you're just harder to see than most '</p>
         </div>
-        <div class="search-panel" id="searchPanel" aria-live="polite"></div>
+
+        <div class="item">
+          <img src="https://i1.sndcdn.com/artworks-hvuPC7OQC2OBPDov-V1Ht2A-t500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Rema, Selena Gomez - Calm Down.mp3', 'Calm Down', 'Rema, Selena Gomez', 'https:/'+'/i1.sndcdn.com/artworks-hvuPC7OQC2OBPDov-V1Ht2A-t500x500.jpg');"></span>
+          </div>
+          <h4> Calm down </h4>
+          <p>'Do it once, do it twice (do it twice)
+            I push back, you hold me tight
+            Get a taste for a night '</p>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://virtualpiano.net/wp-content/uploads/2020/11/The-Night-We-Met-13-Reasons-Why-Lord-Huron-Best-Online-Piano-Keyboard-Virtual-Piano.jpg" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/Lord Huron - The Night We Met.mp3', 'The Night We Met', 'Lord Huron', 'https:/'+'/virtualpiano.net/wp-content/uploads/2020/11/The-Night-We-Met-13-Reasons-Why-Lord-Huron-Best-Online-Piano-Keyboard-Virtual-Piano.jpg');"></span>
+          </div>
+          <h4> The Night We Met </h4>
+          <p>'I don't know what I'm supposed to do
+            Haunted by the ghost of you
+            Oh, take me back to the night we met'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://i1.sndcdn.com/artworks-J3lCZyx8keOpfR1y-PAzksA-t500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/Harry Styles - Sign of the Times.mp3', 'Sign of the Times', 'Harry Styles', 'https:/'+'/i1.sndcdn.com/artworks-J3lCZyx8keOpfR1y-PAzksA-t500x500.jpg');"></span>
+          </div>
+          <h4> Sign Of The Times </h4>
+          <p> Harry Styles -
+            Just stop your crying
+            It's a sign of the times
+            We gotta get away from here
+          </p>
+        </div>
+
+        <div class="item">
+          <img src="https://i1.sndcdn.com/artworks-000116177725-alap1o-t500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/Wiz Khalifa - See You Again ft. Charlie Puth.mp3', 'See You Again', 'Wiz Khalifa ft. Charlie Puth', 'https:/'+'/i1.sndcdn.com/artworks-000116177725-alap1o-t500x500.jpg');"></span>
+          </div>
+          <h4> See You Again </h4>
+          <p>'It's been a long day without you, my friend
+            And I'll tell you all about it when I see you again'</p>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://preview.redd.it/night-changes-has-now-surpassed-1-billion-streams-on-v0-7zn2xd70u7ua1.jpg?width=640&crop=smart&auto=webp&s=d1a2172d731d137d933b00348baa083046243414" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/One Direction - Night Changes.mp3', 'Night Changes', 'One Direction', 'https:/'+'/preview.redd.it/night-changes-has-now-surpassed-1-billion-streams-on-v0-7zn2xd70u7ua1.jpg?width=640&crop=smart&auto=webp&s=d1a2172d731d137d933b00348baa083046243414');"></span>
+          </div>
+          <h4> Night Changes </h4>
+          <p>We're only gettin' older, baby
+            And I've been thinkin' about it lately'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://i1.sndcdn.com/artworks-000132598634-ui94jo-t500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/Steal My Girl - One Direction.mp3', 'Steal My Girl', 'One Direction', 'https:/'+'/i1.sndcdn.com/artworks-000132598634-ui94jo-t500x500.jpg');"></span>
+          </div>
+          <h4> Steal My Girl </h4>
+          <p>'Everybody wanna steal my girl
+            Everybody wanna take her heart away'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://resources.tidal.com/images/24df3cde/8158/43c3/81d8/af526b318696/750x750.jpg" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/JVKE - golden hour (official music video).mp3', 'Golden Hour', 'JVKE', 'https:/'+'/resources.tidal.com/images/24df3cde/8158/43c3/81d8/af526b318696/750x750.jpg');"></span>
+          </div>
+          <h4> Golden Hour </h4>
+          <p>I was all alone with the love of my life
+            She's got glitter for skin
+            My radiant beam in the night
+            I don't need no light to see you
+            Shine...</p>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://is2-ssl.mzstatic.com/image/thumb/Music122/v4/33/9d/f2/339df25b-1f4c-2715-bc07-eb9c144c96ba/5056167176534_1.jpg/1200x1200bb.jpg" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/JVKE - this is what falling in love feels like (Official Video).mp3', 'This Is What Falling In Love Feels Like', 'JVKE', 'https:/'+'/is2-ssl.mzstatic.com/image/thumb/Music122/v4/33/9d/f2/339df25b-1f4c-2715-bc07-eb9c144c96ba/5056167176534_1.jpg/1200x1200bb.jpg');"></span>
+          </div>
+          <h4>This is what falling in love feels like</h4>
+          <p>I know it sounds super cliché
+            But you make me feel some type of way
+            This is falling, falling in love</p>
+        </div>
+
+
+        <div class="item">
+          <img src="https://c.saavncdn.com/026/Chaleya-From-Jawan-Hindi-2023-20230814014337-500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Jawan_ Chaleya.mp3', 'Chaleya', 'Arijit Singh and Shilpa Rao', 'https:/'+'/c.saavncdn.com/026/Chaleya-From-Jawan-Hindi-2023-20230814014337-500x500.jpg');"></span>
+          </div>
+          <h4> Chaleya </h4>
+          <p>Oh Main Taan Chaleya Teri Oar
+            Tera Chaleya Hai Zor
+            Tera Hoya Main Yaar Ve
+            Bhuleya Ae Sansaar Ve </p>
+        </div>
+
+        <div class="item">
+          <img src="https://glasgowguardian.co.uk/wp-content/uploads/sites/2/2021/12/R.png" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/Taylor Swift - All Too Well.mp3', 'Taylor Swift - All Too Well', 'Taylor Swift', 'https:/'+'/glasgowguardian.co.uk/wp-content/uploads/sites/2/2021/12/R.png');"></span>
+          </div>
+          <h4>All Too Well</h4>
+          <p>'Down the stairs, you were there, you remember it all
+            It was rare, I was there, I remember it all too well'</p>
+        </div>
+
+        <div class="item">
+          <img src="taylorswift1989.jpg" />
+          <div class="play">
+            <span class="fa fa-play"></span>
+          </div>
+          <h4>All out 80s</h4>
+          <p>The biggest songs of the 1090s.</p>
+        </div>
       </div>
     </div>
 
-    <div class="home-feed" id="homeFeed"></div>
-  </main>
+    <div class="spotify-playlists">
+      <h2> Taylor Swift </h2>
+      <div class="list">
+        <div class="item">
+          <img
+            src="https://img.buzzfeed.com/buzzfeed-static/static/2018-04/16/10/asset/buzzfeed-prod-web-04/sub-buzz-16652-1523887341-1.jpg?downsize=700%3A%2A&output-quality=auto&output-format=auto" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/TaylorSwift-Enchanted.mp3', 'Enchanted', 'Taylor Swift', 'https:/'+'/img.buzzfeed.com/buzzfeed-static/static/2018-04/16/10/asset/buzzfeed-prod-web-04/sub-buzz-16652-1523887341-1.jpg?downsize=700%3A%2A&output-quality=auto&output-format=auto');"></span>
+          </div>
+          <h4> Enchanted </h4>
+          <p>'This night is sparkling, don't you let it go
+            I'm wonderstruck, blushing all the way home'</p>
+        </div>
 
-  <footer class="player-bar" id="player">
-    <div class="track-meta">
-      <img id="playerArt" src="Images/null.png" alt="" class="player-art">
-      <div class="track-copy">
-        <strong id="playerTitle">No track playing</strong>
-        <span id="playerArtist">Search for something you love</span>
+        <div class="item">
+          <img
+            src="https://t2.genius.com/unsafe/425x425/https%3A%2F%2Fimages.genius.com%2Fefccf69ab98db616b9c315e632383028.600x600x1.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/LoveStory.mp3', 'Love Story', 'Taylor Swift', 'https:/'+'/t2.genius.com/unsafe/425x425/https%3A%2F%2Fimages.genius.com%2Fefccf69ab98db616b9c315e632383028.600x600x1.jpg');"></span>
+          </div>
+          <h4> Love Story </h4>
+          <p>'Cause we were both young when I first saw you'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://i.pinimg.com/originals/a1/49/8d/a1498d7006fe729cde733e554229fcd7.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/TaylorSwift-Style.mp3', 'Taylor Swift - Style', 'Taylor Swift', 'https:/'+'/i.pinimg.com/originals/a1/49/8d/a1498d7006fe729cde733e554229fcd7.jpg');"></span>
+          </div>
+          <h4> Style </h4>
+          <p>'Oh, you got that James Dean daydream look in your eye'</p>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://images.squarespace-cdn.com/content/v1/5c462fd0c3c16a9eac57b7ca/1683482334138-8WU0VWN3H0T9Q402LSFX/20230610_CruelSummer_Square.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Taylor Swift - Cruel Summer.mp3', 'Cruel Summer', 'Taylor Swift', 'https:/'+'/images.squarespace-cdn.com/content/v1/5c462fd0c3c16a9eac57b7ca/1683482334138-8WU0VWN3H0T9Q402LSFX/20230610_CruelSummer_Square.jpg');"></span>
+          </div>
+          <h4> Cruel summer </h4>
+          <p>'It's cool, that's what I tell 'em
+            No rules in breakable heaven
+            But ooh, whoa oh
+            It's a cruel summer'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://upload.wikimedia.org/wikipedia/en/7/70/I_Knew_You_Were_Trouble.png" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/TaylorSwift-IKnewYouWereTrouble.mp3', 'I Knew You Were Trouble', 'Taylor Swift', 'https:/'+'/upload.wikimedia.org/wikipedia/en/7/70/I_Knew_You_Were_Trouble.png');"></span>
+          </div>
+          <h4>I Knew You Were Trouble</h4>
+          <p>'I knew you were trouble when you walked in
+            So shame on me now
+            Flew me to places I'd never been now I'm lyin' on the cold hard ground'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://pbs.twimg.com/media/EV1n5ARWoAMqQgc.jpg:large" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Taylor Swift - Blank Space.mp3', 'Blank Space', 'Taylor Swift', 'https:/'+'/pbs.twimg.com/media/EV1n5ARWoAMqQgc.jpg:large');"></span>
+          </div>
+          <h4>Blank Space</h4>
+          <p>'Got a long list of ex-lovers
+            They'll tell you I'm insane
+            'Cause you know I love the players
+            And you love the game'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://i.scdn.co/image/ab67616d0000b27325751b4b32829d6bbfe6be7f" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/TaylorSwift-willow.mp3', 'Taylor Swift - willow', 'Taylor Swift', 'https:/'+'/i.scdn.co/image/ab67616d0000b27325751b4b32829d6bbfe6be7f');"></span>
+          </div>
+          <h4>Willow</h4>
+          <p>'You know that my train can take you home
+            Anywhere else is hollow
+            I'm begging for you to take my hand
+            Wreck my plans, that's my man'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://i.pinimg.com/736x/68/40/d0/6840d0fdf5e62e492fb6ef2d8341399a.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Taylor Swift - Shake It Off.mp3', 'Shake It Off', 'Taylor Swift', 'https:/'+'/i.pinimg.com/736x/68/40/d0/6840d0fdf5e62e492fb6ef2d8341399a.jpg');"></span>
+          </div>
+          <h4>Shake it Off</h4>
+          <p>'Cause the players gonna play, play, play, play, play
+            And the haters gonna hate, hate, hate, hate, hate</p>
+        </div>
+
+        <div class="item">
+          <img src="https://pbs.twimg.com/media/Ff6oM20XEAExqha.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Taylor Swift - Anti-Hero.mp3', 'Anti-Hero', 'Taylor Swift', 'https:/'+'/pbs.twimg.com/media/Ff6oM20XEAExqha.jpg');"></span>
+          </div>
+          <h4>Anti Hero</h4>
+          <p>"It's me, hi, I'm the problem, it's me (I'm the problem, it's me)
+            At tea time, everybody agrees"</p>
+        </div>
       </div>
     </div>
 
-    <div class="transport">
-      <div class="transport-buttons">
-        <button class="icon-button" id="previousButton" aria-label="Previous track">
-          |&lt;
-        </button>
-        <button class="play-button" id="playPauseButton" aria-label="Play">
-          <span id="playPauseIcon">&gt;</span>
-          <span class="button-spinner" aria-hidden="true"></span>
-        </button>
-        <button class="icon-button" id="nextButton" aria-label="Next track">
-          &gt;|
-        </button>
-      </div>
+    <div class="spotify-playlists">
+      <h2> Arijit Singh </h2>
+      <div class="list">
+        <div class="item">
+          <img
+            src="https://i0.wp.com/99lyricstore.com/wp-content/uploads/2022/11/Apna-Bana-Le-Lyrics-Arijit-Singh.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Apna Bana Le.mp3','Apna Bana Le','Arijit Singh','https:/'+'/i0.wp.com/99lyricstore.com/wp-content/uploads/2022/11/Apna-Bana-Le-Lyrics-Arijit-Singh.jpg')"></span>
+          </div>
+          <h4> Apna-Bana-Le</h4>
+          <p>'Apna Bana Le Piya
+            Apna Bana Le Piya
+            Apna Bana Le Mujhe
+            Apna Bana Le Piya'</p>
+        </div>
 
-      <div class="progress-row">
-        <span id="currentTime">0:00</span>
-        <input id="progressBar" type="range" min="0" max="100" value="0" step="0.1" aria-label="Track progress">
-        <span id="durationTime">0:00</span>
+        <div class="item">
+          <img src="https://i.scdn.co/image/ab67616d0000b2730f29b052ea18eb757ec7ca9a" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Hawayein.mp3','Arijit Singh - Hawayein','Arijit Singh','https:/'+'/i.scdn.co/image/ab67616d0000b2730f29b052ea18eb757ec7ca9a')"></span>
+          </div>
+          <h4>Hawayein</h4>
+          <p>'Le jaayein jaane kahaan
+            Hawayein, hawayein
+            Le jaayein tujhe kahaan
+            Hawayein, hawayein...'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://i.scdn.co/image/ab67616d00001e02ece89c7bf7d8141a1e8eef42" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Ik Vaari Aa.mp3','Ek Vaari Aa','Arijit Singh','https:/'+'/i.scdn.co/image/ab67616d00001e02ece89c7bf7d8141a1e8eef42')"></span>
+          </div>
+          <h4>Ek-Vaari-Aaa</h4>
+          <p>'Ik vaari aa bhi jaa yaara
+            Ik vaari aa...
+            Raah takun main bechara
+            Ik vaari aa...'</p>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://m.media-amazon.com/images/M/MV5BN2Y0YjJkMTctNjNmMC00MDkyLTkzZDktMWZmNTdmN2YyNWNmXkEyXkFqcGdeQXVyMTA5NzIyMDY5._V1_.jpg">
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Khairiyat.mp3','Khairiyat','Arijit Singh','https:/'+'/m.media-amazon.com/images/M/MV5BN2Y0YjJkMTctNjNmMC00MDkyLTkzZDktMWZmNTdmN2YyNWNmXkEyXkFqcGdeQXVyMTA5NzIyMDY5._V1_.jpg')"></span>
+          </div>
+          <h4>Khairiyat</h4>
+          <p>'Khairiyat Puchon
+            Kabhi To Kaifiyat Puchon
+            Tumhare Bin Deewane Ka
+            Kya Haal Hai...'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://c.saavncdn.com/191/Kesariya-From-Brahmastra-Hindi-2022-20220717092820-500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Kesariya.mp3','Arijit Singh - Kesariya','Arijit Singh','https:/'+'/c.saavncdn.com/191/Kesariya-From-Brahmastra-Hindi-2022-20220717092820-500x500.jpg')"></span>
+          </div>
+          <h4>Kesariya</h4>
+          <p>'Kesariya Tera Ishq Hai Piya
+            Rang Jaaun Jo Main Hath Lagaun
+            Din Beete Saara Teri Fikr Mein
+            Rain Saari Teri Khair Manaun...'</p>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://c.saavncdn.com/172/Shayad-Film-Version-From-Love-Aaj-Kal--Hindi-2021-20210325204139-500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Shayad.mp3',' Arijit Singh - Shayad','Arijit Singh','https:/'+'/c.saavncdn.com/172/Shayad-Film-Version-From-Love-Aaj-Kal--Hindi-2021-20210325204139-500x500.jpg')"></span>
+          </div>
+          <h4>Shayad</h4>
+          <p>'Jo tum na ho... rahenge hum nahin
+            Jo tum na ho... rahenge hum nahin
+            Na chahiye kuch tum se zyada tum se kam nahin...'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://upload.wikimedia.org/wikipedia/en/9/9b/Zaalima_Raees_Cover.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Zaalima.mp3','Arijit Singh - Zaalima','Arijit Singh','https:/'+'/upload.wikimedia.org/wikipedia/en/9/9b/Zaalima_Raees_Cover.jpg')"></span>
+          </div>
+          <h4>Zaalima</h4>
+          <p>'Jo tere khatir tadpe pehle se hi
+            Kya usse tadpana
+            O zaalima o zaalima...'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://i1.sndcdn.com/artworks-f48j8UFVEcQIocrq-sHMNbw-t500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/Arijit Singh_ Phir Aur Kya Chahiye.mp3','Phir Aur Kya Chahiye','Arijit Singh','https:/'+'/i1.sndcdn.com/artworks-f48j8UFVEcQIocrq-sHMNbw-t500x500.jpg')"></span>
+          </div>
+          <h4>Phir Aur Kya Chahiye</h4>
+          <p>'Tu Hai Toh Mujhe
+            Phir Aur Kya Chahiye
+            Tu Hai Toh Mujhe
+            Phir Aur Kya Chahiye...'</p>
+        </div>
       </div>
     </div>
 
-    <div class="player-side">
-      <input id="volumeControl" type="range" min="0" max="1" step="0.01" value="0.9" aria-label="Volume">
+    <div class="spotify-playlists">
+      <h2> BLACKPINK </h2>
+
+      <div class="list">
+        <div class="item">
+          <img src="https://i1.sndcdn.com/artworks-000543859353-fvedxx-t500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/BLACKPINK - Dont know what to do MV.mp3','Dont know what to do',' BLACKPINK ','https:/'+'/i1.sndcdn.com/artworks-000543859353-fvedxx-t500x500.jpg')"></span>
+          </div>
+          <h4>Don't Know What to Do</h4>
+          <p>I don't know what to do without
+            I don't know what to do without
+            You, you, you
+            You, you, you
+          </p>
+        </div>
+
+        <div class="item">
+          <img src="https://i.pinimg.com/736x/45/f5/9d/45f59d3d3881f672b67e7a41f8058273.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/BlackPink-Stay.mp3','BlackPink - Stay',' BLACKPINK ','https:/'+'/i.pinimg.com/736x/45/f5/9d/45f59d3d3881f672b67e7a41f8058273.jpg')"></span>
+          </div>
+          <h4> Stay </h4>
+          <p>It goes a little something like
+            La-la-la-la-la-la, la-la-la-la-la-la, la-la-la-la-la-la</p>
+        </div>
+
+        <div class="item">
+          <img src="https://wallpapercave.com/wp/wp4463369.jpg" />
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/As If Its Your Last - BlackPink.mp3','As If Its Your Last',' BLACKPINK ','https:/'+'/wallpapercave.com/wp/wp4463369.jpg')"></span>
+          </div>
+          <h4> As If It's Your Last</h4>
+          <p>Uh, I'ma fall in love, baby
+            You gon' finna catch me
+            Uh, give you all of this, baby
+            Call me pretty and nasty</p>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://blackpink.cafe/wp-content/uploads/2022/08/blackpink-220825-pink-venom-official-merch-lisa.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/BLACKPINK Pink Venom.mp3','Pink Venom',' BLACKPINK ','https:/'+'/blackpink.cafe/wp-content/uploads/2022/08/blackpink-220825-pink-venom-official-merch-lisa.jpg')"></span>
+          </div>
+          <h4> Pink Venom </h4>
+          <p>This that pink venom, this that pink venom
+            This that pink venom (get 'em, get 'em, get 'em)</p>
+        </div>
+
+        <div class="item">
+          <img src="https://qph.cf2.quoracdn.net/main-qimg-f09ed3ef95e24d44edb1fb76352e9559" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/The Happiest Girl.mp3','The Happiest Girl',' BLACKPINK ','https:/'+'/qph.cf2.quoracdn.net/main-qimg-f09ed3ef95e24d44edb1fb76352e9559')"></span>
+          </div>
+          <h4> The Happiest Girl</h4>
+          <p>My heart only wants you
+            The moment you say no
+            But tonight, I'll be the happiest girl in the world
+            You'll see like it doesn't matter</p>
+        </div>
+
+        <div class="item">
+          <img src="https://ih1.redbubble.net/image.1328737274.7617/st,small,507x507-pad,600x600,f8f8f8.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/BlackPink - Forever Young.mp3','Forever Young',' BLACKPINK ','https:/'+'/ih1.redbubble.net/image.1328737274.7617/st,small,507x507-pad,600x600,f8f8f8.jpg')"></span>
+          </div>
+          <h4> Forever Young </h4>
+          <p>Girls wanna have some fun
+            We go dumb, dumb, dumb
+            Yeah, girls wanna have some fun
+            We ain't done, done, done (let's go)</p>
+        </div>
+
+        <div class="item">
+          <img src="https://i1.sndcdn.com/artworks-GdlO3nipcLdcaqRI-2UhFUg-t500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Tally.mp3','Blackpink - Tally',' BLACKPINK ','https:/'+'/i1.sndcdn.com/artworks-GdlO3nipcLdcaqRI-2UhFUg-t500x500.jpg')"></span>
+          </div>
+          <h4> Tally </h4>
+          <p>'I ain't gon' conceal it I'll just do it like the boys say, I'm getting mine, getting mine</p>
+        </div>
+
+        <div class="item">
+          <img src="https://i1.sndcdn.com/artworks-3sQZWeESgRKR5MqT-Zu0WGQ-t500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/BLACKPINK Crazy Over You.mp3','Crazy Over You',' BLACKPINK ','https:/'+'/i1.sndcdn.com/artworks-3sQZWeESgRKR5MqT-Zu0WGQ-t500x500.jpg')"></span>
+          </div>
+          <h4> Crazy Over You </h4>
+          <p> Sound the alarms
+            I'ma be mad till you get me back in them arms
+            Charge
+            Give me all you got
+            Go insane with it, better love hard</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="spotify-playlists">
+      <h2>Armaan Malik</h2>
+
+      <div class="list">
+        <div class="item">
+          <img src="https://i1.sndcdn.com/artworks-000558108219-h0hfs6-t500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Tu Pehla Pehla Pyar hai Mera.mp3','Pehla Pyaar',' Armaan Malik ','https:/'+'/i1.sndcdn.com/artworks-000558108219-h0hfs6-t500x500.jpg')"></span>
+          </div>
+          <h4>Pehla Pyar</h4>
+          <p>'Tu Pehla Pehla Pyaar Hai Mera...
+            Tu Pehla Pehla Pyaar Hai Mera Haan...'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://c.saavncdn.com/709/Bol-Do-Na-Zara-Instrumental-Hindi-2018-20181221231527-500x500.jpg" />
+          <div class="play" onclick="playSong('songs/BOL DO NA ZARA.mp3','Bol-Do-Na-Zara',' Armaan Malik ','https:/'+'/c.saavncdn.com/709/Bol-Do-Na-Zara-Instrumental-Hindi-2018-20181221231527-500x500.jpg')">
+            <span class="fa fa-play" onclick="playSong('')"></span>
+          </div>
+          <h4>Bol Do Na Zara</h4>
+          <p>'Bol Do Na Zara
+            Dil Mein Jo Hai Chhipa
+            Main Kisi Se Kahunga Nahi...'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://c.saavncdn.com/098/Ghar-Se-Nikalte-Hi-Hindi-2018-20180407081907-500x500.jpg">
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Ghar Se Nikalte Hi.mp3','Ghar Se Nikalte Hi',' Armaan Malik ','https:/'+'/c.saavncdn.com/098/Ghar-Se-Nikalte-Hi-Hindi-2018-20180407081907-500x500.jpg')"></span>
+          </div>
+          <h4>Ghar Se Nikalte Hi</h4>
+          <p>Ghar se nikalte hi
+            Kuch door chalte hi
+            Raste mein hai uska ghar</p>
+        </div>
+
+        <div class="item">
+          <img src="https://i1.sndcdn.com/artworks-000151944028-4wrwk3-t500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/SAB TERA.mp3','Sab Tera',' Armaan Malik ','https:/'+'/i1.sndcdn.com/artworks-000151944028-4wrwk3-t500x500.jpg')"></span>
+          </div>
+          <h4>Sab Tera</h4>
+          <p>'Main Toh Tere Dhang Mein
+            Dhal Chuki Hu
+            Bass Teri Ban Chuki Hu
+            Mera Mujhme Kuch Nahi
+            sab Tera...'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://c.saavncdn.com/590/Wajah-Tum-Ho-Hindi-2016-500x500.jpg">
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/WAJAH TUM HO.mp3','Wajha Tum Ho ',' Armaan Malik ','https:/'+'/c.saavncdn.com/590/Wajah-Tum-Ho-Hindi-2016-500x500.jpg')"></span>
+          </div>
+          <h4>Wajah Tum Ho</h4>
+          <p>'Main jo jee raha hoon
+            Wajah tum ho..
+            Wajah tum ho.. '</p>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA_5KIFuz7X_XFipxTXBip9QQX1uv1YaFapwq-iyzkHIlv6YXSzmYJHv3tpad62TceXj0&usqp=CAU">
+          <div class="play">
+            <span class="fa fa-play"
+              onclick="playSong('Songs/Hua Hain Aaj Pehli Baar.mp3','Hua Hain Aaj Pehli Baar',' Armaan Malik ','https:/'+'/encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTA_5KIFuz7X_XFipxTXBip9QQX1uv1YaFapwq-iyzkHIlv6YXSzmYJHv3tpad62TceXj0&usqp=CAU')"></span>
+          </div>
+          <h4>Hua Hai Aaj Pehli Baar</h4>
+          <p>'Hua hai aaj pehli baar
+            Jo aise muskuraya hun
+            Tumhe dekha toh jaana ye
+            Ke kyun duniya mein aaya hun...'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://c.saavncdn.com/082/Chale-Aana-From-De-De-Pyaar-De-Hindi-2019-20190503065702-500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/CHALE AANA.mp3','Chale Aana',' Armaan Malik ','https:/'+'/c.saavncdn.com/082/Chale-Aana-From-De-De-Pyaar-De-Hindi-2019-20190503065702-500x500.jpg')"></span>
+          </div>
+          <h4>Chale Aana</h4>
+          <p>'Kabhi Main Yaad Aayun Ton
+            Chale Aana Chale Aana...'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://c.saavncdn.com/706/Kehta-Hai-Pal-Pal-Hindi-2017-500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Kehta Hai Pal Pal.mp3','Kehta Hai Pal Pal',' Armaan Malik ','https:/'+'/c.saavncdn.com/706/Kehta-Hai-Pal-Pal-Hindi-2017-500x500.jpg')"></span>
+          </div>
+          <h4>Kehta Hai Pal Pal</h4>
+          <p>'Kehta hai pal pal tumse
+            Hoke dil yeh deewana...'</p>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="spotify-playlists">
+      <h2> KK </h2>
+      <div class="list">
+        <div class="item">
+          <img src="https://c.saavncdn.com/749/Dil-Ibaadat-Lofi-Mix-Hindi-2021-20211118142308-500x500.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Dil Ibadat.mp3',' Dil Ibadat ',' KK ','https:/'+'/c.saavncdn.com/749/Dil-Ibaadat-Lofi-Mix-Hindi-2021-20211118142308-500x500.jpg')"></span>
+          </div>
+          <h4>Dil Ibadat</h4>
+          <p>'Dil ibadat kar raha hai Dhadkanein meri sun
+            Tujh ko main kar lu haasil lagi hai yehi dhun...'</p>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6Qv37IqOB2kTd9MbvmY8LNQrkBBZBLOjMEA&usqp=CAU" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Piya Aye Na.mp3','Piya Aye Na',' KK ','https:/'+'/encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS6Qv37IqOB2kTd9MbvmY8LNQrkBBZBLOjMEA&usqp=CAU')"></span>
+          </div>
+          <h4>Piya Aye Na</h4>
+          <p>'Woh piya aaye na
+            Woh Piya aaye na
+            Piya aaye na woh piya aaye na...'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://i.scdn.co/image/ab67616d0000b273cbf9868f67bc58511b48af2a" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Haan Tu Hain.mp3','Haan Tu Hain',' KK ','https:/'+'/i.scdn.co/image/ab67616d0000b273cbf9868f67bc58511b48af2a')"></span>
+          </div>
+          <h4>Haan Tu Hai</h4>
+          <p>'Haan tu hai Haan tu hai
+            Meri baaton mein tu hai
+            Meri khawaabon mein tu
+            Yaddon mein tu
+            Iraado mein tu hai..'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://resources.tidal.com/images/90da7927/e040/4b92/8ea2/1a342c94a449/750x750.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/KHUDA JAANE.mp3','Khuda Jaane',' KK ','https:/'+'/resources.tidal.com/images/90da7927/e040/4b92/8ea2/1a342c94a449/750x750.jpg')"></span>
+          </div>
+          <h4>Khuda Jane</h4>
+          <p>'Khuda Jaane Ke Main Fida Hoon
+            Khuda Jaane Main Mitt Gaya
+            Khuda Jaane Ye Kyun Hua Hai
+            Ke Ban Gae Ho Tum Mere Khuda...'</p>
+        </div>
+
+
+        <div class="item">
+          <img
+            src="https://is1-ssl.mzstatic.com/image/thumb/Music126/v4/17/47/fd/1747fd5c-354b-6dc5-c43c-a0e8fa9b8943/cover.jpg/400x400cc.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Zara Sa Audio Song.mp3','Zara Sa',' KK ','https:/'+'/is1-ssl.mzstatic.com/image/thumb/Music126/v4/17/47/fd/1747fd5c-354b-6dc5-c43c-a0e8fa9b8943/cover.jpg/400x400cc.jpg')"></span>
+          </div>
+          <h4> Zara Sa</h4>
+          <p>'Zara Si dil mein de jagah tu
+            Zara sa apna le bana
+            Zara sa khwabon mein saja tu
+            Zara sa yaadon mein basa...'</p>
+        </div>
+
+
+        <div class="item">
+          <img
+            src="https://i0.wp.com/99lyricstore.com/wp-content/uploads/2021/04/Tu2Bhi2Bmeri2Bshab2Bhai2BHindi2BLove2BSong2BLyrics252C2BSung2BBy2BK.K.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Tu Hi Meri Shab Hai.mp3','Tu Hi Mera Shab Hai',' KK ','https:/'+'/i0.wp.com/99lyricstore.com/wp-content/uploads/2021/04/Tu2Bhi2Bmeri2Bshab2Bhai2BHindi2BLove2BSong2BLyrics252C2BSung2BBy2BK.K.jpg')"></span>
+          </div>
+          <h4>Tu Hi Meri Shab Hai</h4>
+          <p>'Tu hi meri shab hai subah
+            Hai tu hi din hai mera
+            Tu hi mera rab hai jahaan
+            Hai tu hi meri duniya...'</p>
+        </div>
+
+        <div class="item">
+          <img
+            src="https://c-cl.cdn.smule.com/smule-gg-s-sf-bck2/arr/9c/d4/54d47378-d960-482b-9395-f13ac5e3395d_1024.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/Tu Jo Mila Lyrical Song.mp3','Tu Jo Mila ',' KK ','https:/'+'/c-cl.cdn.smule.com/smule-gg-s-sf-bck2/arr/9c/d4/54d47378-d960-482b-9395-f13ac5e3395d_1024.jpg')"></span>
+          </div>
+          <h4> Tu Jo Mila </h4>
+          <p>'Tu jo mila lo ho gaya main qaabil
+            Tu jo mila to ho gaya sab haasil haan!..'</p>
+        </div>
+
+        <div class="item">
+          <img src="https://c-cl.cdn.smule.com/rs-s78/arr/49/ac/8ab30b9f-0dcf-4d23-a03c-7a6bf9e076a0.jpg" />
+          <div class="play">
+            <span class="fa fa-play" onclick="playSong('Songs/TUJHE SOCHTA HOON.mp3','Tujhe Sochta Hoon',' KK ','https:/'+'/c-cl.cdn.smule.com/rs-s78/arr/49/ac/8ab30b9f-0dcf-4d23-a03c-7a6bf9e076a0.jpg')"></span>
+          </div>
+          <h4>Tujhe Sochta Hoon </h4>
+          <p>'Bas sare gham mein jaana, sang hoon tere
+            Har ek mausam me jaana, sang hoon tere...'</p>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- <div class="spotify-playlists">
+      <h2> Add Music Artist name here </h2>
+
+      <div class="list">
+        <div class="item">
+          <img src="taylorswift1989.jpg" />
+          <div class="play">
+            <span class="fa fa-play"></span>
+          </div>
+          <h4>Viva Latino</h4>
+          <p>Today's top Latin hits elevando nuestra...</p>
+        </div>
+
+        <div class="item">
+          <img src="taylorswift1989.jpg" />
+          <div class="play">
+            <span class="fa fa-play"></span>
+          </div>
+          <h4>RapCaviar</h4>
+          <p>New Music from Lil Baby, Juice WRLD an...</p>
+        </div>
+
+        <div class="item">
+          <img src="taylorswift1989.jpg" />
+          <div class="play">
+            <span class="fa fa-play"></span>
+          </div>
+          <h4>All out 2010s</h4>
+          <p>The biggest spmgs pf tje 2010s. Cover:...</p>
+        </div>
+
+        <div class="item">
+          <img src="taylorswift1989.jpg" />
+          <div class="play">
+            <span class="fa fa-play"></span>
+          </div>
+          <h4>Rock Classics</h4>
+          <p>Rock Legends & epic songs that continue t...</p>
+        </div>
+
+        <div class="item">
+          <img src="taylorswift1989.jpg" />
+          <div class="play">
+            <span class="fa fa-play"></span>
+          </div>
+          <h4>Chill Hits</h4>
+          <p>Kick back to the best new and recent chill...</p>
+        </div>
+
+        <div class="item">
+          <img src="taylorswift1989.jpg" />
+          <div class="play">
+            <span class="fa fa-play"></span>
+          </div>
+          <h4>Viva Latino</h4>
+          <p>Today's top Latin hits elevando nuestra...</p>
+        </div>
+
+        <div class="item">
+          <img src="taylorswift1989.jpg" />
+          <div class="play">
+            <span class="fa fa-play"></span>
+          </div>
+          <h4>Mega Hit Mix</h4>
+          <p>A mega mix of 75 favorites from the last...</p>
+        </div>
+
+        <div class="item">
+          <img src="taylorswift1989.jpg" />
+          <div class="play">
+            <span class="fa fa-play"></span>
+          </div>
+          <h4>All out 80s</h4>
+          <p>The biggest songs of the 1090s.</p>
+        </div>
+      </div>
+    </div> -->
+
+    <hr>
+  </div>
+  </div>
+  <div class="footer-player">
+    <div class="footer-player-left">
+      <div class="footer-player-left-song">
+
+        <div class="horizontal">
+          <!-- Update the image source to an empty string, it will be updated dynamically -->
+          <img id="songLogo" class="playerImg" src="Images/null.png" alt="Error">
+          <div class="vertical">
+            <!-- Update the song name to indicate it's not playing initially -->
+            <div id="songName" class="underline bold">No Track Playing</div>
+            <!-- Update the song artist to indicate it's not playing initially -->
+            <div>
+              <div id="songArtist" class="underline typewriter">Pick Your Song</div>
+            </div>
+          </div>
+          <!-- Add buttons/icons for save to library and YouTube, as per your requirement -->
+          <div title="Save To Your Library" class="favourite"><i class="fas fa-heart"></i></div>
+          <div title="YouTube" class="favourite" onclick="togglePlayPause()"><i class="fas fa-play"></i></div>
+        </div>
+        
+
+      </div>
+      <div class="footer-player-left-like">
+        <!-- <img src="assets/FiiledLike.svg" alt="" class="spotify-color" style="height: 18px; width: 18px;"> -->
+      </div>
+    </div>
+    <!-- <span class="footer-player-left-song-artist" id="songName"> Now Playing : </span> -->
+
+    <div class="footer-player-middle">
+      <div class="footer-player-middle-buttons">
+        <img src="assets/Shuffle.svg" alt="" class="gray-filtered">
+        <img src="assets/Previous.svg" alt="" class="gray-filtered" onclick="playPreviousSong()">
+        <span class="pause-button">
+          <img id="playPauseIcon" src="assets/Pause.svg" alt="" onclick="togglePlayPause()">
+        </span>
+        <img src="assets/Next.svg" alt="" class="gray-filtered" onclick="playNextSong()">
+        <img src="assets/Repeat.svg" alt="" class="gray-filtered">
+      </div>
+      <div class="footer-player-middle-slider">
+        <!-- <img src="Playing.gif" alt="gif" width="25px"> -->
+        <div class="player-time"> <span id="currentTime">00:00</span> </div>
+        <div class="player-slider">
+          <input type="range" name="range" id="progressBar" min="0" max="100" value="0" step="0.1">
+        </div>
+        <div class="player-time"><span id="songLength">00:00</span></div>
+      </div>
+    </div>
+    <div class="footer-player-right">
+      <div class="footer-player-right-buttons">
+        <img src="assets/Lyrics.svg" alt="">
+        <img src="assets/Queue.svg" class="filtered-img" alt="">
+        <img src="assets/Connect to a device.svg" class="filtered-img" alt="">
+        <img src="assets/Volume.svg" id="volumeIcon" class="filtered-img" alt="">
+        <div class="player-slider" style="margin-right: 20px; width: 200px;">
+          <input type="range" min="0" max="100" value="100" id="progressBarVolume"
+            style="width: 75px; position: relative; top: -5px;">
+        </div>
+        
+        <img src="assets/Full screen.svg" class="filtered-img" alt="">
+      </div>
+    </div>
+  </div>
+
+
+  <footer class="footer-color" id="falling-lines">
+    <div class="falling-line"></div>
+    <div class="footer-container">
+      <div class="footer-creators">
+        <h1>Developers : </h1>
+        <span id="creators"></span>
+        <span class="cursor"></span>
+      </div>
+      <div class="footer-divider"></div>
+      <div class="footer-logo">
+        <img src="https://f.cdn-static.cn/52549_163098249260012.png?imageView2/2/w/500/q/75" alt="Staccato Logo">
+      </div>
     </div>
   </footer>
+  <div>
+    <br><br><br><br>
+  </div>
 
-  <audio id="audioPlayer"></audio>
-  <script src="config.js"></script>
-  <script src="Staccato.js"></script>
+
+  <script src="https://kit.fontawesome.com/23cecef777.js" crossorigin="anonymous"></script>
+  <script src="Staccato.js"> </script>
+  <script src="sketch.js"></script>
 </body>
 
 </html>
